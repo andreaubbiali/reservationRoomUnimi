@@ -1,32 +1,116 @@
 // TODO look at the starred page on chrome, save the session into mongoDB not in local storage
 
 
-exports.auth = (req, res) => {
+exports.login = async (req, res) => {
 
-    // Capture the input fields
-	let username = req.body.username;
-	let password = req.body.password;
+    // console.log(req.body);
 
-    console.log(username + "  " + password);
+    // // Capture the input fields
+    // let username = req.body.username;
+    // let password = req.body.password;
 
-	// Ensure the input fields exists and are not empty
-	if (username && password) {
+    // console.log(username + "  " + password);
 
-        if (username === "admin" && password === "password"){
-            req.session.loggedin = true;
-            res.redirect('/birds');
-        } else {
+    // // Ensure the input fields exists and are not empty
+    // if ((username && password)) {
 
-            let resp = {
-                "response": "Incorrect Username and/or Password!"
-            }
+    //   if (username === "admin" && password === "password") {
+    //     req.session.loggedin = true;
+    //     res.redirect('/birds');
+    //   } else {
 
-            res.render('login', resp);
+    //     res.status(401).send("Incorrect Username/Password!");
+    //     // let resp = {
+    //     //   "response": "Incorrect Username and/or Password!"
+    //     // }
+
+    //     // res.render('login', resp);
+    //   }
+    //   res.end();
+
+    // } else {
+    //   res.status(401).send('Please enter Username and Password!');
+    //   res.end();
+    // }
+
+    try {
+        // Get user input
+        const { email, password } = req.body;
+
+        // Validate user input
+        if (!(email && password)) {
+            res.status(400).send("All input is required");
         }
-        res.end();
-        
-	} else {
-		res.send('Please enter Username and Password!');
-		res.end();
-	}
+        // Validate if user exist in our database
+        const user = await User.findOne({ email });
+
+        if (user && (await bcrypt.compare(password, user.password))) {
+            // Create token
+            const token = jwt.sign(
+                { user_id: user._id, email },
+                process.env.TOKEN_KEY,
+                {
+                    expiresIn: "2h",
+                }
+            );
+
+            // save user token
+            user.token = token;
+
+            // user
+            res.status(200).json(user);
+        }
+        res.status(400).send("Invalid Credentials");
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+exports.register = async (req, res) => {
+
+    try {
+
+        const { first_name, last_name, email, password } = req.body;
+
+        // Validate user input
+        if (!(email && password && first_name && last_name)) {
+            res.status(400).send("All input is required");
+        }
+
+        // check if user already exist
+        // Validate if user exist in our database
+        const oldUser = await User.findOne({ email });
+
+        if (oldUser) {
+            return res.status(409).send("User Already Exist. Please Login");
+        }
+
+        //Encrypt user password
+        encryptedPassword = await bcrypt.hash(password, 10);
+
+        // Create user in our database
+        const user = await User.create({
+            first_name,
+            last_name,
+            email: email.toLowerCase(), // sanitize: convert email to lowercase
+            password: encryptedPassword,
+        });
+
+        // Create token
+        const token = jwt.sign(
+            { user_id: user._id, email },
+            process.env.TOKEN_KEY,
+            {
+                expiresIn: "2h",
+            }
+        );
+        // save user token
+        user.token = token;
+
+        // return new user
+        res.status(201).json(user);
+    } catch (err) {
+        console.log(err);
+    }
+
 }
