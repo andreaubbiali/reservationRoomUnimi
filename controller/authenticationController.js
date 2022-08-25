@@ -1,11 +1,13 @@
-const { response } = require("express");
-
 // TODO look at the starred page on chrome, save the session into mongoDB not in local storage
 
+
 exports.auth = (req, res) => {
+
     // Capture the input fields
 	let username = req.body.username;
 	let password = req.body.password;
+
+    console.log(username + "  " + password);
 
 	// Ensure the input fields exists and are not empty
 	if (username && password) {
@@ -14,7 +16,12 @@ exports.auth = (req, res) => {
             req.session.loggedin = true;
             res.redirect('/birds');
         } else {
-            res.send('Incorrect Username and/or Password!');
+
+            let resp = {
+                "response": "Incorrect Username and/or Password!"
+            }
+
+            res.render('login', resp);
         }
         res.end();
         

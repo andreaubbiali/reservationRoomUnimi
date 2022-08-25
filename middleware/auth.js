@@ -19,6 +19,10 @@ module.exports = (req, res, next) => {
     if (req.session.loggedin){
         next();
     } else {
-        res.render('login');
+        let resp = {
+            "response": null
+        }
+
+        res.render('login', resp);
     }
 }
