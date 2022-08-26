@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
  * @param {*} res the response.
  * @param {*} next.
  */
-exports.verifyToken = (req, res, next) => {
+const verifyToken = (req, res, next) => {
 
     const token =
         req.body.token || req.query.token || req.headers["x-access-token"];
@@ -24,3 +24,5 @@ exports.verifyToken = (req, res, next) => {
     }
     return next();
 }
+
+module.exports = verifyToken;
