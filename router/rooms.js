@@ -4,7 +4,7 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const roomController = require('../controller/roomsController');
 
-// define the home page route
+// get rooms by user roles.
 router.get('/', auth, roomController.getRoomsByUserRoles);
 
 module.exports = router;
