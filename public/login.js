@@ -16,11 +16,11 @@ function provalogin() {
     // salva il token in cookie o local storage
 
     let localBody = ({
-        username: "prova",
-        password: "prova"
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value
     })
 
-    fetch(baseUrl+"/login", {
+    fetch(baseUrl+"/api/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -29,7 +29,7 @@ function provalogin() {
         })
         .then(res => {
             if (res.ok) {
-                console.log("ok");
+                window.location.href = baseUrl + "/views/rooms.html";
             } else {
                 console.log("not ok");
             }
