@@ -21,7 +21,7 @@ exports.createUser = (firstName, lastName, email, encryptedPassword, roles) => {
     return User.create({
         firstName,
         lastName,
-        email: email.toLowerCase(),
+        email: email,
         password: encryptedPassword,
         roles: roles,
     });
