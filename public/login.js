@@ -1,6 +1,4 @@
-/* JavaScript code for the client */ 
 
-const baseUrl = "http://localhost:3000"
 
 /* Functions */
 
@@ -20,7 +18,7 @@ function provalogin() {
         password: document.getElementById("password").value
     })
 
-    fetch(baseUrl+"/api/login", {
+    fetch( apiBaseUrl + "login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -29,7 +27,7 @@ function provalogin() {
         })
         .then(res => {
             if (res.ok) {
-                window.location.href = baseUrl + "/views/rooms.html";
+                window.location.href = viewBaseUrl + "rooms.html";
             } else {
                 console.log("not ok");
             }

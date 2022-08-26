@@ -20,7 +20,7 @@ function register() {
         return document.getElementById("errorMessage").innerHTML = "Password doesn't match";
     }
 
-    fetch(baseUrl+"/api/register", {
+    fetch(apiBaseUrl + "register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -29,7 +29,7 @@ function register() {
     })
     .then(res => {
         if (res.ok) {
-            window.location.href = baseUrl + "/views/rooms.html";
+            window.location.href = viewBaseUrl + "rooms.html";
         } else {
             console.log("not ok");
         }
