@@ -14,3 +14,7 @@ room's reservation project for the web programming exam
 # Start app
 
 `npm start`
+
+# Start dev (reload automatically on changes)
+
+`npm run dev`
