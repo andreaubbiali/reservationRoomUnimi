@@ -1,4 +1,4 @@
-const Room = require("../model/room");
+const RoomRepo = require("../repository/room");
 
 /**
  * @param {*} req the request.
@@ -7,8 +7,12 @@ const Room = require("../model/room");
  */
 exports.getRoomsByUserRoles = async (req, res) => {
 
-    const rooms = await Room.find({rolesAllowed: { $in: req.user.roles }});
-   
+    const rooms = await RoomRepo.findByUserRoles(req.user.roles);
+    if (!rooms){
+        res.status(400).send("No rooms founded for the role: " + req.user.roles);
+        return res.end();
+    }
+
     res.status(200).json(rooms);
     return res.end();
 }

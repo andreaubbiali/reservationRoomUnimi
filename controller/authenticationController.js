@@ -1,92 +1,91 @@
-// TODO look at the starred page on chrome, save the session into mongoDB not in local storage
-
-const User = require("../model/user");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const JwtUtilities = require("./jwtUtilities");
+const UserRepo = require("../repository/user");
 
-const baseRole = "STUDENT";
-
+/**
+ * login a user.
+ * @param {*} req the request.
+ * @param {*} res the response. 
+ * @returns the logged user.
+ */
 exports.login = async (req, res) => {
 
     try {
-        // Get user input
         const { email, password } = req.body;
 
-        // Validate user input
-        if (!(email && password)) {
+        if (!email || !password) {
             res.status(400).send("All input is required");
+            return res.end();
         }
-        // Validate if user exist in our database
-        const user = await User.findOne({ email });
-
-        if (user && (await bcrypt.compare(password, user.password))) {
-            // Create token
-            const token = jwt.sign(
-                { user_id: user._id, email, roles: user.roles },
-                process.env.TOKEN_KEY,
-                {
-                    expiresIn: "2h",
-                }
-            );
-
-            // save user token
-            user.token = token;
-
-            // user
-            res.status(200).json(user);
+        
+        const user = await UserRepo.findUserByEmail(email);
+        if (!user || !(await bcrypt.compare(password, user.password))) {
+            res.status(400).send("Invalid credentials");
+            return res.end();
         }
-        res.status(400).send("Invalid Credentials");
+
+        user.token = JwtUtilities.createJWToken(user._id, email, user.roles);
+
+
+        res.status(200).json(userToDto(user));
+        return res.end();
+
     } catch (err) {
         console.log(err);
+        res.status(500).json(err);
+        return res.end();
     }
 }
 
+/**
+ * register a user.
+ * @param {*} req the request.
+ * @param {*} res the response.
+ * @returns the created and logged in user.
+ */
 exports.register = async (req, res) => {
 
     try {
 
         const { firstName, lastName, email, password } = req.body;
 
-        // Validate user input
-        if (!(email && password && firstName && lastName)) {
+        if (!email || !password || !firstName || !lastName) {
             res.status(400).send("All input is required");
+            return res.end();
         }
 
-        // check if user already exist
-        // Validate if user exist in our database
-        const oldUser = await User.findOne({ email });
-
-        if (oldUser) {
-            return res.status(409).send("User Already Exist. Please Login");
+        // chek if the user already exist.
+        if (await UserRepo.findUserByEmail(email)) {
+            res.status(409).send("User Already Exist. Please Login");
+            return res.end();
         }
 
         //Encrypt user password
         encryptedPassword = await bcrypt.hash(password, 10);
 
-        // Create user in our database
-        const user = await User.create({
-            firstName,
-            lastName,
-            email: email.toLowerCase(), // sanitize: convert email to lowercase
-            password: encryptedPassword,
-            roles: [baseRole],
-        });
+        const user = await UserRepo.createUser(firstName, lastName, email, encryptedPassword, [process.env.BASE_USER_ROLE]);
 
-        // Create token
-        const token = jwt.sign(
-            { user_id: user._id, email, roles: [baseRoles] },
-            process.env.TOKEN_KEY,
-            {
-                expiresIn: "2h",
-            }
-        );
-        // save user token
-        user.token = token;
+        user.token = JwtUtilities.createJWToken(user._id, email, user.roles);;
 
-        // return new user
-        res.status(201).json(user);
+        res.status(201).json(userToDto(user));
+        return res.end();
     } catch (err) {
         console.log(err);
+        res.status(500).json(err);
+        return res.end();
     }
+}
 
+/**
+ * @param {*} user the repository user.
+ * @returns the essentials user information.
+ */
+function userToDto(user) {
+    return {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        roles: user.roles,
+        token: user.token
+    }
 }
