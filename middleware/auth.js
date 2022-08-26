@@ -8,7 +8,8 @@ const verifyToken = (req, res, next) => {
         req.body.token || req.query.token || req.headers["x-access-token"];
 
     if (!token) {
-        res.redirect('http://localhost:3000/views/login.html');
+        res.status(401).send("Token not found.");
+        // res.redirect('http://localhost:3000/views/login.html');
         return res.end();
     }
     try {

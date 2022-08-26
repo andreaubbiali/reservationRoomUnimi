@@ -4,37 +4,9 @@ const User = require("../model/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const baseRole = "STUDENT";
+
 exports.login = async (req, res) => {
-
-    // console.log(req.body);
-
-    // // Capture the input fields
-    // let username = req.body.username;
-    // let password = req.body.password;
-
-    // console.log(username + "  " + password);
-
-    // // Ensure the input fields exists and are not empty
-    // if ((username && password)) {
-
-    //   if (username === "admin" && password === "password") {
-    //     req.session.loggedin = true;
-    //     res.redirect('/birds');
-    //   } else {
-
-    //     res.status(401).send("Incorrect Username/Password!");
-    //     // let resp = {
-    //     //   "response": "Incorrect Username and/or Password!"
-    //     // }
-
-    //     // res.render('login', resp);
-    //   }
-    //   res.end();
-
-    // } else {
-    //   res.status(401).send('Please enter Username and Password!');
-    //   res.end();
-    // }
 
     try {
         // Get user input
@@ -50,7 +22,7 @@ exports.login = async (req, res) => {
         if (user && (await bcrypt.compare(password, user.password))) {
             // Create token
             const token = jwt.sign(
-                { user_id: user._id, email },
+                { user_id: user._id, email, roles: user.roles },
                 process.env.TOKEN_KEY,
                 {
                     expiresIn: "2h",
@@ -97,11 +69,12 @@ exports.register = async (req, res) => {
             lastName,
             email: email.toLowerCase(), // sanitize: convert email to lowercase
             password: encryptedPassword,
+            roles: [baseRole],
         });
 
         // Create token
         const token = jwt.sign(
-            { user_id: user._id, email },
+            { user_id: user._id, email, roles: [baseRoles] },
             process.env.TOKEN_KEY,
             {
                 expiresIn: "2h",

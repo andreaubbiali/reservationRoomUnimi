@@ -5,6 +5,6 @@ const auth = require('../middleware/auth');
 const roomController = require('../controller/roomsController');
 
 // define the home page route
-router.get('/', auth, roomController.getRoomsByUserRole);
+router.get('/', auth, roomController.getRoomsByUserRoles);
 
 module.exports = router;
