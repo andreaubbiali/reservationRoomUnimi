@@ -18,8 +18,8 @@ const authenticationController = require('./controller/authenticationController'
 app.post('/api/login', authenticationController.login);
 app.post('/api/register', authenticationController.register);
 
-const birds = require('./router/bird');
-app.use('/api/birds', birds);
+const rooms = require('./router/rooms');
+app.use('/api/rooms', rooms);
 
 
 module.exports = app;

@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const auth = require('../middleware/auth');
-const birdController = require('../controller/birdController');
+const roomController = require('../controller/roomsController');
 
 // define the home page route
-router.get('/', auth, birdController.function_name);
+router.get('/', auth, roomController.getRoomsByUserRole);
 
 module.exports = router;
