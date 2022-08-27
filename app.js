@@ -19,7 +19,9 @@ app.post('/api/login', authenticationController.login);
 app.post('/api/register', authenticationController.register);
 
 const rooms = require('./router/rooms');
-app.use('/api/rooms', rooms);
+const reservation = require('./router/reservations');
 
+app.use('/api/rooms', rooms);
+app.use("/api/reservation", reservation);
 
 module.exports = app;
