@@ -6,23 +6,24 @@ const logger = require('morgan');
 require("dotenv").config();
 require("./config/database").connect();
 
-// app.set('view engine', 'ejs');
+app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
 app.use(express.json());
-app.set('views', path.join(__dirname, '/public/views'));
-app.use(express.static('public', {index:'/views/login.html'}));
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.static(path.join(__dirname, 'static')));
+app.use(express.static('public'));
 
 
 const authenticationController = require('./controller/authenticationController');
 app.post('/api/login', authenticationController.login);
 app.post('/api/register', authenticationController.register);
 
+const index = require('./router/index');
 const rooms = require('./router/rooms');
 const reservation = require('./router/reservations');
 
+// log only request below 
+app.use(logger('dev'));
+app.use('/', index);
+app.use(logger('dev'));
 app.use('/api/rooms', rooms);
 app.use("/api/reservation", reservation);
 

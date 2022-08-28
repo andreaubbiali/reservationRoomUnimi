@@ -5,7 +5,7 @@
  * @param {*} res the response.
  * @returns 204 if the reservation is done, errors otherwise.
  */
-exports.reserveRoom() = async (req, res) => {
+exports.reserveRoom = async (req, res) => {
 
     const { roomID, date, slot } = req.body;
 

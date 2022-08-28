@@ -27,7 +27,7 @@ function provalogin() {
         })
         .then(res => {
             if (res.ok) {
-                window.location.href = viewBaseUrl + "rooms.html";
+                window.location.href = viewBaseUrl + "room";
             } else {
                 console.log("not ok");
             }
@@ -35,4 +35,8 @@ function provalogin() {
         .catch(error => {
             console.error(error);
         })
+}
+
+function register() {
+    window.location.href = viewBaseUrl + "register";
 }
