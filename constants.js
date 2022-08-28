@@ -1,1 +1,1 @@
-const slots = ['MORNING', 'AFTERNOON'];
+exports.slots = ['MORNING', 'AFTERNOON'];
