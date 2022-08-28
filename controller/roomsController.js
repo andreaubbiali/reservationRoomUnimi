@@ -36,6 +36,8 @@ exports.isRoomReservable = async (roomID, userRoles, date, slot) => {
         return false;
     }
 
+    // TODO check if the user has already reserved this room.
+
     const occupiedPlaces = await ReservationRepo.getNumberReservationByRoomID(roomID, date, slot);
 
     return occupiedPlaces < room.capacity;
