@@ -7,7 +7,7 @@ const reservationSchema = new mongoose.Schema({
         type: String,
         required: true 
     },
-    userID: { 
+    usersID: { 
         type: [String], 
         required: true 
     },

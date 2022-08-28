@@ -1,4 +1,5 @@
 const RoomRepo = require("../repository/room");
+const ReservationRepo = require("../repository/reservation");
 
 /**
  * @param {*} req the request.
@@ -18,12 +19,24 @@ exports.getRoomsByUserRoles = async (req, res) => {
 }
 
 /**
- * 
+ * Check if a room is reservable by the userRole, the date and the slot.
  * @param {*} userRoles the array of user roles
- * @returns true if the room is reservable by the user roles, false otherwise.
+ * @returns true if the room is reservable, false otherwise.
  */
-exports.isRoomReservableByUserRoles = async (roomID, userRoles) => {
+exports.isRoomReservable = async (roomID, userRoles, date, slot) => {
 
-    const room = RoomRepo.findById(roomID);
-    return userRoles.some(r => room.rolesAllowed.includes(r));
+    const room = await RoomRepo.findById(roomID);
+    
+    if (!room){
+        // todo throw error with new error method
+        return false;
+    }
+    
+    if (!userRoles.some(r => room.rolesAllowed.includes(r))){
+        return false;
+    }
+
+    const occupiedPlaces = await ReservationRepo.getNumberReservationByRoomID(roomID, date, slot);
+
+    return occupiedPlaces < room.capacity;
 }
