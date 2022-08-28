@@ -2,20 +2,22 @@ const bcrypt = require("bcrypt");
 const JwtUtilities = require("./jwtUtilities");
 const UserRepo = require("../repository/user");
 
+
+const Api400Error = require('../errors/api400Response');
+
 /**
  * login a user.
  * @param {*} req the request.
  * @param {*} res the response. 
  * @returns the logged user.
  */
-exports.login = async (req, res) => {
+exports.login = async (req, res, next) => {
 
     try {
         const { email, password } = req.body;
 
         if (!email || !password) {
-            res.status(400).send("All input is required");
-            return res.end();
+            throw new Api400Error('email and password are required');
         }
         
         const user = await UserRepo.findUserByEmail(email);
@@ -31,9 +33,7 @@ exports.login = async (req, res) => {
         return res.end();
 
     } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-        return res.end();
+        next(err);
     }
 }
 
