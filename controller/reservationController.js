@@ -1,4 +1,5 @@
-// const RoomRepo = require("../repository/room");
+const RoomCtrl = require('./roomsController');
+const constant = require('../constants');
 
 /**
  * @param {*} req the request.
@@ -8,14 +9,31 @@
 exports.reserveRoom = async (req, res) => {
 
     const { roomID, date, slot } = req.body;
+    const user = req.user;
 
-    const rooms = await RoomRepo.findByUserRoles(req.user.roles);
-    if (!rooms){
-        res.status(400).send("No rooms founded for the role: " + req.user.roles);
+    if (!roomID || !date || !slot || !user) {
+        res.status(400).send('Some param missing');
         return res.end();
     }
 
-    res.status(200).json(rooms);
+    if ((date <= (new Date())) || !(constant.slots.contains(slot)) ){
+        res.status(400).send('Date or slot wrong');
+        return res.end();
+    }
+
+    // check user role with room role
+    if (!(await RoomCtrl.isRoomReservableByUserRoles(roomID, user.roles))) {
+        res.status(400).send('User has not the right role to book this room');
+        return res.end();
+    }
+
+    // check number of reservation
+    if ( (await UserCtrl.getActiveUserReservation(user.userID)) >= process.env.MAX_ACTIVE_RESERVATION) {
+        res.status(400).send('Maximum number of reservation reached');
+        return res.end();
+    }
+
+    res.status(204);
     return res.end();
 }
 

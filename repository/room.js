@@ -7,3 +7,11 @@ const Room = require("../model/room");
 exports.findByUserRoles = (roles) => {
     return Room.find({rolesAllowed: { $in: roles }});
 }
+
+/**
+ * @param {*} id the id.
+ * @returns the room.
+ */
+exports.findById = (id) => {
+    return Room.findById(id);
+}

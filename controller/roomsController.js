@@ -16,3 +16,14 @@ exports.getRoomsByUserRoles = async (req, res) => {
     res.status(200).json(rooms);
     return res.end();
 }
+
+/**
+ * 
+ * @param {*} userRoles the array of user roles
+ * @returns true if the room is reservable by the user roles, false otherwise.
+ */
+exports.isRoomReservableByUserRoles = async (roomID, userRoles) => {
+
+    const room = RoomRepo.findById(roomID);
+    return userRoles.some(r => room.rolesAllowed.includes(r));
+}

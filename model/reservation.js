@@ -17,7 +17,7 @@ const reservationSchema = new mongoose.Schema({
     },
     slot: {
         type: String,
-        enum: [constant.slot.MORNING, constant.slot.AFTERNOON],
+        enum: constant.slots,
         retuired: true
     }
     // startDate: {

@@ -5,9 +5,9 @@ const jwt = require("jsonwebtoken");
  * @param {*} userRoles the user roles.
  * @returns the jwt token.
  */
-exports.createJWToken = (userEmail, userRoles) => {
+exports.createJWToken = (userID, userEmail, userRoles) => {
     return jwt.sign(
-        { userEmail, roles: userRoles },
+        { userID, userEmail, roles: userRoles },
         process.env.TOKEN_KEY,
         {
             expiresIn: "2h",

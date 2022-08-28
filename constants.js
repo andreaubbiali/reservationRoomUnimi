@@ -1,4 +1,1 @@
-const slots = {
-    MORNING: "MORNING",
-    AFTERNOON: "AFTERNOON"
-}
+const slots = ['MORNING', 'AFTERNOON'];
