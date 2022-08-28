@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
+/**
+ * Render of ejs pages
+ */
+
 // GET home page.
 router.get('/', function (req, res) {
     res.redirect('/login');
