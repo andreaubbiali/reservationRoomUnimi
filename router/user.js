@@ -15,7 +15,8 @@ router.post('/login',
 
 // register user
 router.post('/register', 
-    
+    validator.registerValidation,
+    validationMiddleware,
     authenticationController.register
 );
 

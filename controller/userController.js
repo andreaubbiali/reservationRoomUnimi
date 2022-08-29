@@ -44,11 +44,6 @@ exports.register = async (req, res) => {
 
         const { firstName, lastName, email, password } = req.body;
 
-        if (!email || !password || !firstName || !lastName) {
-            res.status(400).send("All input is required");
-            return res.end();
-        }
-
         // chek if the user already exist.
         if (await UserRepo.findUserByEmail(email)) {
             res.status(409).send("User Already Exist. Please Login");
