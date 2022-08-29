@@ -1,5 +1,8 @@
-const RoomRepo = require("../repository/room");
-const ReservationRepo = require("../repository/reservation");
+const RoomRepo = require('../repository/room');
+const ReservationRepo = require('../repository/reservation');
+
+const Api404Error = require('../errors/api404Response');
+const Api400Error = require('../errors/api400Response');
 
 /**
  * @param {*} req the request.
@@ -10,8 +13,7 @@ exports.getRoomsByUserRoles = async (req, res) => {
 
     const rooms = await RoomRepo.findByUserRoles(req.user.roles);
     if (!rooms){
-        res.status(400).send("No rooms founded for the role: " + req.user.roles);
-        return res.end();
+        throw new Api404Error('No rooms found for the role of the user');
     }
 
     res.status(200).json(rooms);
@@ -23,22 +25,31 @@ exports.getRoomsByUserRoles = async (req, res) => {
  * @param {*} userRoles the array of user roles
  * @returns true if the room is reservable, false otherwise.
  */
-exports.isRoomReservable = async (roomID, userRoles, date, slot) => {
+exports.isRoomReservable = async (roomID, userRoles, userID, date, slot) => {
 
     const room = await RoomRepo.findById(roomID);
     
     if (!room){
-        // todo throw error with new error method
-        return false;
-    }
-    
-    if (!userRoles.some(r => room.rolesAllowed.includes(r))){
-        return false;
+        throw new Api404Error('No rooms found with the given id');
     }
 
-    // TODO check if the user has already reserved this room.
+    const reservation = await ReservationRepo.getReservation(roomID, date, slot);
+    if (reservation) {
 
-    const occupiedPlaces = await ReservationRepo.getNumberReservationByRoomID(roomID, date, slot);
+        // check occupied places.
+        if (reservation.usersID.length >= room.capacity){
+            return false;
+        }
+        
+        if (!userRoles.some(r => room.rolesAllowed.includes(r))){
+            throw new Api400Error('User has no the right role to reserve the room.');
+        }
+        
+        if (reservation.usersID.includes(userID)){
+            throw new Api400Error('User has already reserved this room.')
+        }
 
-    return occupiedPlaces < room.capacity;
+    }
+
+    return true;
 }

@@ -1,18 +1,13 @@
 const Reservation = require("../model/reservation");
 
 /**
+ * @param {*} roomID the roomID.
  * @param {*} date the date.
  * @param {*} slot the slot.
- * @returns the number of reserved place in a specific date and slot.
+ * @returns the reservation of a specific room in a date and slot.
  */
-exports.getNumberReservationByRoomID = async (roomID, date, slot) => {
-    const reservation = await Reservation.findOne({ roomID, date, slot });
-
-    if (!reservation || reservation.length == 0) {
-        return 0;
-    }
-
-    return reservation.usersID.length;
+exports.getReservation = async (roomID, date, slot) => {
+    return await Reservation.findOne({ roomID, date, slot });
 }
 
 /**
@@ -53,7 +48,4 @@ exports.createReservation = async (roomID, userID, date, slot) => {
         )
 
     }
-
-
-
 }
