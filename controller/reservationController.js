@@ -40,11 +40,12 @@ exports.getUserReservations = async (req, res, next) => {
         const user = req.user;
 
         let reservations = await ReservationRepo.GetReservationsByUserID(user.userID);
+
+        reservations = filterReservations(reservations, active);
+
         if (!reservations || reservations.length === 0){
             throw new Api404Error('No reservation found for the user.');
         }
-
-        reservations = filterReservations(reservations, active);
         
         res.status(200).json(reservations);
         return res.end();
@@ -66,8 +67,8 @@ exports.reserveRoom = async (req, res, next) => {
         const user = req.user;
     
         // check number of reservation
-        // todo fixa questa chiamata
-        if ( (await UserCtrl.getActiveUserReservation(user.userID)) >= process.env.MAX_ACTIVE_RESERVATION) {
+        let userReservations = await ReservationRepo.GetReservationsByUserID(user.userID);
+        if (activeUserReservations(userReservations) >= process.env.MAX_ACTIVE_RESERVATION){
             throw new Api400Error('Maximum number of reservation reached');
         }
     
@@ -89,17 +90,29 @@ exports.reserveRoom = async (req, res, next) => {
 /**
  * @param {*} reservations the reservations.
  * @param {*} active the param used to filter.
+ * @returns reservations filtered by the active param.
  */
 function filterReservations(reservations, active) {
-    let res = null;
-    if (active){
-        res = reservations.filter(r => r.date >= new Date());
-    } else {
-        res = reservations.filter(r => r.date < new Date());
+    if (!reservations){
+        return null;
     }
 
-    if (!res || res.length === 0){
-        throw new Api404Error('No reservation found for the user.');
+    if (active){
+        return reservations.filter(r => r.date >= new Date());
+    } else {
+        return reservations.filter(r => r.date < new Date());
     }
-    return res
+}
+
+/**
+ * @param {*} reservations the reservations.
+ * @returns the number of active reservation.
+ */
+function activeUserReservations(reservations) {
+    let res = filterReservations(reservations, true);
+    if (!res) {
+        return 0;
+    }
+
+    return res.length;
 }
