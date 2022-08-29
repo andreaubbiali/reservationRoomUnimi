@@ -7,3 +7,7 @@ exports.reserveRoomValidation = [
     check('date', 'Date required after today').isAfter(),
     check('slot', 'Slot must be one of MORNING or AFTERNOON').isIn(constant.slots)
 ]
+
+exports.userReservationFiltered = [
+    check('active', 'Active required').not().isEmpty(),
+]

@@ -11,6 +11,14 @@ exports.getReservation = async (roomID, date, slot) => {
 }
 
 /**
+ * @param {*} userID the userID.
+ * @returns the reservations of the user.
+ */
+exports.GetReservationsByUserID = async (userID) => {
+    return Reservation.find({ usersID: userID });
+}
+
+/**
  * @param {*} userID the user id.
  * @returns the number of reservations active for the user.
  */
