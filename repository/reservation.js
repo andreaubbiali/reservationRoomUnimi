@@ -19,16 +19,6 @@ exports.GetReservationsByUserID = async (userID) => {
 }
 
 /**
- * @param {*} userID the user id.
- * @returns the number of reservations active for the user.
- */
-exports.getActiveUserReservation = (userID) => {
-// TODO add where date>today
-    return Reservation
-        .countDocuments({ usersID: userID });
-}
-
-/**
  * @param {*} roomID the roomID.
  * @param {*} userID the userID.
  * @param {*} date the date.

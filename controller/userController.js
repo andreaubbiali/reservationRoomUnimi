@@ -1,5 +1,4 @@
 const UserRepo = require('../repository/user');
-const ReservationRepo = require('../repository/reservation');
 const bcrypt = require("bcrypt");
 const JwtUtilities = require("./jwtUtilities");
 
@@ -61,14 +60,6 @@ exports.register = async (req, res) => {
     } catch (err) {
         next(err);
     }
-}
-
-/**
- * @param {*} userID the user id.
- * @returns the number of active user reservations.
- */
-exports.getActiveUserReservation = async (userID) => {
-    return ReservationRepo.getActiveUserReservation(userID);
 }
 
 /**
