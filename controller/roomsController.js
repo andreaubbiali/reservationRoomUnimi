@@ -33,16 +33,16 @@ exports.isRoomReservable = async (roomID, userRoles, userID, date, slot) => {
         throw new Api404Error('No rooms found with the given id');
     }
 
+    if (!userRoles.some(r => room.rolesAllowed.includes(r))){
+        throw new Api400Error('User has no the right role to reserve the room.');
+    }
+
     const reservation = await ReservationRepo.getReservation(roomID, date, slot);
     if (reservation) {
 
         // check occupied places.
         if (reservation.usersID.length >= room.capacity){
             return false;
-        }
-        
-        if (!userRoles.some(r => room.rolesAllowed.includes(r))){
-            throw new Api400Error('User has no the right role to reserve the room.');
         }
         
         if (reservation.usersID.includes(userID)){
