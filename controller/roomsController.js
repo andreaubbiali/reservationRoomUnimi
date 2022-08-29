@@ -7,17 +7,50 @@ const Api400Error = require('../errors/api400Response');
 /**
  * @param {*} req the request.
  * @param {*} res the response.
+ * @returns the room by the id.
+ */
+ exports.getRoomByID = async (req, res, next) => {
+    
+    try{
+
+        const id = req.params.id;
+        const room = await RoomRepo.findById(id);
+        if (!room){
+            throw new Api404Error('No rooms found for the role of the user');
+        }
+    
+        if (!req.user.roles.some(r => room.rolesAllowed.includes(r))){
+            throw new Api400Error('User has no the right role for the room.');
+        }
+    
+        res.status(200).json(room);
+        return res.end();
+
+    } catch (err) {
+        next(err);
+    }
+}
+
+/**
+ * @param {*} req the request.
+ * @param {*} res the response.
  * @returns the rooms by the logged user roles
  */
-exports.getRoomsByUserRoles = async (req, res) => {
+exports.getRoomsByUserRoles = async (req, res, next) => {
+    try{
 
-    const rooms = await RoomRepo.findByUserRoles(req.user.roles);
-    if (!rooms){
-        throw new Api404Error('No rooms found for the role of the user');
+        const rooms = await RoomRepo.findByUserRoles(req.user.roles);
+        if (!rooms){
+            throw new Api404Error('No rooms found for the role of the user');
+        }
+    
+        res.status(200).json(rooms);
+        return res.end();
+
+    } catch (err) {
+        next(err);
     }
 
-    res.status(200).json(rooms);
-    return res.end();
 }
 
 /**
