@@ -3,8 +3,8 @@ const ReservationRepo = require('../repository/reservation');
 const bcrypt = require("bcrypt");
 const JwtUtilities = require("./jwtUtilities");
 
-
 const Api400Error = require('../errors/api400Response');
+const Api409Error = require('../errors/api409Response');
 
 /**
  * login a user.
@@ -46,8 +46,7 @@ exports.register = async (req, res) => {
 
         // chek if the user already exist.
         if (await UserRepo.findUserByEmail(email)) {
-            res.status(409).send("User Already Exist. Please Login");
-            return res.end();
+            throw new Api409Error();
         }
 
         //Encrypt user password
@@ -60,9 +59,7 @@ exports.register = async (req, res) => {
         res.status(201).json(userToDto(user));
         return res.end();
     } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-        return res.end();
+        next(err);
     }
 }
 
