@@ -3,11 +3,20 @@ const express = require('express');
 const router = express.Router();
 
 const authenticationController = require('../controller/userController');
+const validator = require('../validator/userValidator');
+const validationMiddleware = require('../middleware/validationMiddleware');
 
 // login user
-router.post('/login', authenticationController.login);
+router.post('/login',
+    validator.loginValidation,
+    validationMiddleware,
+    authenticationController.login
+);
 
 // register user
-router.post('/register', authenticationController.register);
+router.post('/register', 
+    
+    authenticationController.register
+);
 
 module.exports = router;

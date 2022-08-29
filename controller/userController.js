@@ -17,18 +17,12 @@ exports.login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
 
-        if (!email || !password) {
-            throw new Api400Error('email and password are required');
-        }
-
         const user = await UserRepo.findUserByEmail(email);
         if (!user || !(await bcrypt.compare(password, user.password))) {
-            res.status(400).send("Invalid credentials");
-            return res.end();
+            throw new Api400Error('Invalid credentials');
         }
 
         user.token = JwtUtilities.createJWToken(user._id, email, user.roles);
-
 
         res.status(200).json(userToDto(user));
         return res.end();
