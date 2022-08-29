@@ -18,7 +18,7 @@ function provalogin() {
         password: document.getElementById("password").value
     })
 
-    fetch( apiBaseUrl + "/user/login", {
+    fetch( apiBaseUrl + "user/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
