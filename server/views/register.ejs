@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1">
+		<title>Register</title>
+
+		<!-- <script src="../register.js"></script>
+        <script src="../environmentVar.js"></script> -->
+
+	</head>
+	<body>
+		<div class="register">
+			<h1>Register</h1>
+            
+				<input type="text" name="firstName" placeholder="First name" id="firstName" required>
+				<input type="text" name="lastName" placeholder="Last name" id="lastName" required>
+				<input type="text" name="email" placeholder="Email" id="email" required>
+				
+				<input type="password" name="password" placeholder="Password" id="password" required>
+                <input type="password" name="repPassword" placeholder="repeat password" id="repeatPassword" required>
+
+				<button type="button" onclick="register()" title="register">Register</button>
+
+                <span id="errorMessage"></span>
+		</div>
+	</body>
+
+    <script>
+        
+        function register() {
+
+            console.log("CIAO FUNZIONA QUESTO");
+
+            fetch('http://localhost:3000/api/rooms', {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzA4OTU1ODVlMjY4OTM0NjZlNDM4NzgiLCJ1c2VyRW1haWwiOiJ1YmE5OWFAZ21haWwuY29tIiwicm9sZXMiOlsiU1RVREVOVCJdLCJpYXQiOjE2NjE3ODk5MjEsImV4cCI6MTY2MTc5NzEyMX0.WUxNFn9DCWZOAJ2rhTrJYBuOwpUINFVwtKbqn3t-WxU',
+                }
+            })
+            .then(res => {
+                console.log(res.statusText);
+                return res.json();
+            })
+            .then(data => console.log(data));
+            // {
+            //     if (res.ok) {
+            //         console.log(res);
+            //         // window.location.href = viewBaseUrl + "rooms.html";
+            //     } else {
+            //         console.log("not ok");
+            //     }
+            // })
+            // .catch(error => {
+            //     console.error(error);
+            // })
+
+        }
+
+    </script>
+</html>
