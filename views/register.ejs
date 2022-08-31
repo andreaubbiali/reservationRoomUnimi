@@ -25,38 +25,4 @@
                 <span id="errorMessage"></span>
 		</div>
 	</body>
-
-    <script>
-        
-        function register() {
-
-            console.log("CIAO FUNZIONA QUESTO");
-
-            fetch('http://localhost:3000/api/rooms', {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2MzA4OTU1ODVlMjY4OTM0NjZlNDM4NzgiLCJ1c2VyRW1haWwiOiJ1YmE5OWFAZ21haWwuY29tIiwicm9sZXMiOlsiU1RVREVOVCJdLCJpYXQiOjE2NjE3ODk5MjEsImV4cCI6MTY2MTc5NzEyMX0.WUxNFn9DCWZOAJ2rhTrJYBuOwpUINFVwtKbqn3t-WxU',
-                }
-            })
-            .then(res => {
-                console.log(res.statusText);
-                return res.json();
-            })
-            .then(data => console.log(data));
-            // {
-            //     if (res.ok) {
-            //         console.log(res);
-            //         // window.location.href = viewBaseUrl + "rooms.html";
-            //     } else {
-            //         console.log("not ok");
-            //     }
-            // })
-            // .catch(error => {
-            //     console.error(error);
-            // })
-
-        }
-
-    </script>
 </html>
