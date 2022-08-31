@@ -3,6 +3,7 @@ const app = express();
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const errorMiddleware = require('./middleware/errorMiddleware');
+const cors = require('cors');
 
 require("dotenv").config();
 require('./config/database').connect();
@@ -11,7 +12,8 @@ app.set('view engine', 'ejs');
 
 app.use(express.json());
 app.use(bodyParser.json());
-
+// todo fix cors
+app.use(cors())
 
 const rooms = require('./router/room');
 const reservations = require('./router/reservation');
