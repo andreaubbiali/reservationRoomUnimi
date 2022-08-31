@@ -1,5 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const bodyParser = require('body-parser');
+let urlEncoded = bodyParser.urlencoded({extended: false});
+
+const roomCtrl = require('../controller/room');
+const userCtrl = require('../controller/user');
+
 
 /**
  * Render of ejs pages
@@ -10,16 +16,16 @@ router.get('/', function (req, res) {
     res.redirect('/login');
 });
 
-router.get('/login', function (req, res) {
+router.get('/login', function(req, res) {
     res.render('login');
 });
+
+router.post('/login', urlEncoded, userCtrl.loginUser);
 
 router.get('/register', function (req, res) {
     res.render('register');
 });
 
-router.get('/room', function (req, res) {
-    res.render('room');
-});
+router.get('/room', roomCtrl.getRoom);
 
 module.exports = router;

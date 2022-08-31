@@ -7,6 +7,7 @@ const http = require("http");
 const serverApp = require("./server/app");
 const server = http.createServer(serverApp);
 const serverPort = process.env.API_PORT;
+const express = require("express");
 
 // server listening 
 server.listen(serverPort, () => {
@@ -18,6 +19,9 @@ server.listen(serverPort, () => {
  */
 
 const clientApp = require("./client/app");
+
+clientApp.use(express.static('public'));
+
 const client = http.createServer(clientApp);
 const clientPort = process.env.CLIENT_PORT;
 
