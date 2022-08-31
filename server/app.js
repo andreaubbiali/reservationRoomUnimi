@@ -11,7 +11,6 @@ app.set('view engine', 'ejs');
 
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(express.static('public'));
 
 
 const rooms = require('./router/room');
