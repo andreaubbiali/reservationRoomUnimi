@@ -14,12 +14,9 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 
-const index = require('./router/index');
 const rooms = require('./router/room');
 const reservations = require('./router/reservation');
 const users = require('./router/user');
-
-app.use('/', index);
 
 // log only request below 
 app.use(logger('dev'));
