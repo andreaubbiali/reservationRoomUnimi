@@ -1,0 +1,22 @@
+<%- include('header') %>
+<div class="register">
+    <h1>Rooms</h1>
+
+        <ul>
+            <% for(var i=0; i<rooms.length; i++) {%>
+                <a href="/room/<%= rooms[i]._id %>">
+                    <div style="width:200px;height:100px;background-color:yellow">
+                        Room name: <%= rooms[i].name %></br>
+                        Capacity: <%= rooms[i].capacity %>
+                    </div>
+                </a>
+            <% } %>
+        </ul>
+
+        <% if(error != null){ %>
+            <p>
+                <%= error %>
+            </p> 
+        <% } %>
+</div>
+<%- include('footer') %>
