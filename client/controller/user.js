@@ -3,7 +3,7 @@ const axios = require('axios');
 exports.loginUser = async (req, res) => {
 
     if (req.session.user){
-        res.render('room');
+        return res.redirect('room');
     }
 
     if (req.body.email && req.body.password){
@@ -15,8 +15,8 @@ exports.loginUser = async (req, res) => {
 
         req.session.user = response.data;
 
-        res.redirect('room');
+        return res.redirect('room');
     }
 
-    res.render('login');
+    return res.render('login');
 }
