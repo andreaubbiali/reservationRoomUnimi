@@ -1,12 +1,22 @@
 const axios = require('../utils/axiosInstance');
 
+let jsonOutput = {
+    'rooms': [],
+    'capacity': null,
+    'error': null
+}
+
 exports.getRoom = async (req, res) => {
 
     const prova = axios.axiosRequest(req, res);
 
-    const response = await prova.get('/rooms');
-    console.log(response.data);
-    
+    await prova.get('/rooms')
+    .then(response => {
+        jsonOutput.rooms = response.data;
+    })
+    .catch(error => {
+        jsonOutput.error = error.response.data;
+    });
 
-    res.render('room');
+    return res.render('room', jsonOutput);
 }

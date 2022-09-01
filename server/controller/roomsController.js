@@ -40,7 +40,7 @@ exports.getRoomsByUserRoles = async (req, res, next) => {
     try{
 
         const rooms = await RoomRepo.findByUserRoles(req.user.roles);
-        if (!rooms){
+        if (!rooms || rooms.length === 0){
             throw new Api404Error('No rooms found for the role of the user');
         }
     

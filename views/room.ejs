@@ -10,11 +10,20 @@
 		<div class="register">
 			<h1>Rooms</h1>
 
-				<div style="width:50px;height:50px;background-color:yellow">ciao</div>
-                <div style="width:50px;height:50px;background-color:yellow">ciao</div>
-                <div style="width:50px;height:50px;background-color:yellow">ciao</div>
-                <div style="width:50px;height:50px;background-color:yellow">ciao</div>
+                <ul>
+                    <% for(var i=0; i<rooms.length; i++) {%>
+                        <div style="width:100px;height:100px;background-color:yellow">
+                            <%= rooms[i].name %></br>
+                            <%= rooms[i].capacity %>
+                        </div>
+                    <% } %>
+                </ul>
 
+                <% if(error != null){ %>
+                    <p>
+                        <%= error %>
+                    </p> 
+                <% } %>
 		</div>
 	</body>
 </html>
