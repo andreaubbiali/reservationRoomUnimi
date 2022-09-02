@@ -1,8 +1,27 @@
 
-body {
-    background-color: rgba(207, 236, 225, 0.836);
+.bordifica {
+    border: solid 5px yellow;
 }
 
+/**
+* LOGIN
+*/
+.rowLogin {
+    margin-top: 10%;
+}
+
+.inputLogin {
+    margin-top:4px;
+    margin-bottom:4px;
+}
+
+.login {
+    max-width:500px;
+}
+
+/**
+* FOOTER
+*/
 .footer-stl {
     position:absolute;
     width:100%;

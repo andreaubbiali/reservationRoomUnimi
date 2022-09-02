@@ -1,17 +1,43 @@
 <%- include('header') %>
-<div class="login">
-    <h1>Login</h1>
-    <form action="/login" method="POST">
-        <label for="username">
-            <i class="fas fa-user"></i>
-        </label>
-        <input type="text" name="email" placeholder="Email" required value="uba99a@gmail.com">
-        <label for="password">
-            <i class="fas fa-lock"></i>
-        </label>
-        <input type="password" name="password" placeholder="Password" required value="password">
-        <input type="submit" value="adaLogin">
-    </form>
-</div>
-<a href="/register"> Aren't you registered? Click here </a>
-<%- include('footer') %>
+    <div class="container-fluid">
+
+
+        <div class="row justify-content-md-center rowLogin">
+            <!-- sx col -->
+            <div class="col col-lg-3">
+            </div>
+
+            <!-- center col -->
+            <div class="col-lg-6 login">
+                <form class="text-center" action="/login" method="POST">
+
+                    <div class="form-outline mb-4">
+                        <span class="fas fa-user">
+                            <input class=" form-control inputLogin" type="email" placeholder="Email" id="email" name="email"/>
+                            <label class="form-label" for="email">Email address</label>
+                        </span>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <span class="fas fa-lock">
+                            <input class="form-control inputLogin" type="password" placeholder="Password" id="password"/>
+                            <label class="form-label" for="password">Password</label>
+                        </span>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+                    <div class="text-center">
+                        <p>Not a member? <a href="/register">Register</a></p>
+                    </div>
+                </form>
+
+            </div>
+
+            <!-- dx col -->
+            <div class="col col-lg-3">
+            </div>
+
+        </div>
+    </div>
+    <%- include('footer') %>
