@@ -26,6 +26,8 @@ router.get('/register', function (req, res) {
     res.render('register');
 });
 
-router.get('/room', roomCtrl.getRoom);
+router.get('/rooms', roomCtrl.getRoom);
+
+router.get('/room/:id', roomCtrl.getRoomByID);
 
 module.exports = router;
