@@ -12,8 +12,7 @@ const verifyToken = (req, res, next) => {
         req.body.token || req.query.token || req.headers["x-access-token"];
 
     if (!token) {
-        res.render('login');
-        // res.status(401).send("Token not found.");
+        res.status(401).send("Token not found.");
         return res.end();
     }
     try {
