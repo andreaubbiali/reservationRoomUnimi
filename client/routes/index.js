@@ -17,7 +17,10 @@ router.get('/', function (req, res) {
 });
 
 router.get('/login', function(req, res) {
-    res.render('login');
+    let jsonOutput = {
+        error: null,
+    }
+    res.render('login', jsonOutput);
 });
 
 router.post('/login', urlEncoded, userCtrl.loginUser);

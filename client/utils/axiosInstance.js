@@ -3,7 +3,7 @@ const axios = require('axios');
 exports.axiosRequest = (req, res) =>{
 
     if (!req.session.user){
-        return res.render('login');
+        return res.redirect('login');
     }
 
     return axios.create({

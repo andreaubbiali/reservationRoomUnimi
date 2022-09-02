@@ -6,17 +6,26 @@ exports.loginUser = async (req, res) => {
         return res.redirect('rooms');
     }
 
-    if (req.body.email && req.body.password){
-
-        const response = await axios.post(process.env.API_BASE_URL + 'user/login', {
-            email: req.body.email,
-            password: req.body.password
-        });
-
-        req.session.user = response.data;
-
-        return res.redirect('rooms');
+    let jsonOutput = {
+        error: null,
     }
 
-    return res.render('login');
+    if (req.body.email && req.body.password){
+
+        await axios.post(process.env.API_BASE_URL + 'user/login', {
+            email: req.body.email,
+            password: req.body.password
+        })
+        .then(response => {
+            req.session.user = response.data;
+            return res.redirect('rooms');
+        })
+        .catch(error => {
+            console.log(error.response.data);
+            jsonOutput.error = error.response.data;
+        })
+   
+    }
+
+    return res.render('login', jsonOutput);
 }

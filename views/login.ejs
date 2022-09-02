@@ -20,17 +20,23 @@
 
                     <div class="form-outline mb-4">
                         <span class="fas fa-lock">
-                            <input class="form-control inputLogin" type="password" placeholder="Password" id="password"/>
+                            <input class="form-control inputLogin" type="password" placeholder="Password" id="password" name="password"/>
                             <label class="form-label" for="password">Password</label>
                         </span>
                     </div>
 
-                    <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
 
                     <div class="text-center">
                         <p>Not a member? <a href="/register">Register</a></p>
                     </div>
                 </form>
+
+                <% if(error != null){ %>
+                    <p class="text-danger">
+                        <%= error %>
+                    </p> 
+                <% } %>
 
             </div>
 
