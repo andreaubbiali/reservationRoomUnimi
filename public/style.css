@@ -1,0 +1,9 @@
+.footer-stl {
+    position:absolute;
+    width:100%;
+    bottom:0;
+}
+
+.footer-snd {
+    background-color: rgba(0, 0, 0, 0.2);
+}
