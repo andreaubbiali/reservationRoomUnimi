@@ -26,8 +26,8 @@ exports.GetReservationsByUserID = async (userID) => {
  * @returns the created/updated reservation. 
  */
 exports.createReservation = async (roomID, userID, date, slot) => {
-    
-    const reservation = await Reservation.findOne({ roomID });
+
+    const reservation = await Reservation.findOne({ roomID, date, slot });
 
     if (!reservation){
         
