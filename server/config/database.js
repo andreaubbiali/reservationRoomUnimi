@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 
 const { MONGO_URI, DBNAME } = process.env;
 
+mongoose.set('debug', true);
+
 exports.connect = () => {
     // Connecting to the database
     mongoose
