@@ -21,11 +21,17 @@ router.post('/userFiltered',
 );
 
 // book a room.
-router.post('/book', 
+router.post('/reserveRoom', 
     auth, 
     validator.reserveRoomValidation,
     validationMiddleware,
     reservationController.reserveRoom
+);
+
+// delete a reservation
+router.delete('/:reservationID', 
+    auth,
+    reservationController.deleteReservation
 );
 
 module.exports = router;

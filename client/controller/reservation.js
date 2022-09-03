@@ -11,7 +11,7 @@ exports.reserveRoom = async (req, res) => {
 
     const axiosReq = axios.axiosRequest(req, res);
 
-    await axiosReq.post('/reservation/book',request)
+    await axiosReq.post('/reservation/reserveRoom',request)
     .then(response => {
 
         return roomCtrl.showErrorGetRoomByID(res, 'ROOM BOOKED');

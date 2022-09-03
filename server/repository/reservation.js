@@ -1,6 +1,14 @@
 const Reservation = require("../model/reservation");
 
 /**
+ * @param {*} reservationID 
+ * @returns 
+ */
+exports.getReservationByID = async (reservationID) => {
+    return Reservation.findOne({ '_id': reservationID });
+}
+
+/**
  * @param {*} roomID the roomID.
  * @param {*} date the date.
  * @param {*} slot the slot.
@@ -14,7 +22,7 @@ exports.getReservation = async (roomID, date, slot) => {
  * @param {*} userID the userID.
  * @returns the reservations of the user.
  */
-exports.GetReservationsByUserID = async (userID) => {
+exports.getReservationsByUserID = async (userID) => {
     return Reservation.find({ usersID: userID }).sort('date').populate('roomID');
 }
 
@@ -46,4 +54,23 @@ exports.createReservation = async (roomID, userID, date, slot) => {
         )
 
     }
+}
+
+/**
+ * @param {*} reservationID the reservationID.
+ * @param {*} userID the userID.
+ */
+exports.deleteUserReservation = async (reservationID, userID) => {
+
+    res = await Reservation.updateOne(
+        {'_id': reservationID},
+        { $pull: {usersID: userID}}
+    )
+    
+    const reservation = await this.getReservationByID(reservationID);
+    if (reservation.usersID.length === 0){
+        return Reservation.remove({'_id': reservationID});
+    }
+    
+    return
 }

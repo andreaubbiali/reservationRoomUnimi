@@ -67,7 +67,7 @@ exports.reserveRoom = async (req, res, next) => {
         const user = req.user;
     
         // check number of reservation
-        let userReservations = await ReservationRepo.GetReservationsByUserID(user.userID);
+        let userReservations = await ReservationRepo.getReservationsByUserID(user.userID);
         if (activeUserReservations(userReservations) >= process.env.MAX_ACTIVE_RESERVATION){
             throw new Api400Error('Maximum number of reservation reached');
         }
@@ -78,6 +78,36 @@ exports.reserveRoom = async (req, res, next) => {
         }
     
         await ReservationRepo.createReservation(roomID, user.userID, date, slot);
+    
+        res.status(204);
+        return res.end();
+
+    } catch(err) {
+        next(err);
+    }
+}
+
+/**
+ * @param {*} req the request.
+ * @param {*} res the response.
+ * @returns 204 if the reservation has been deleted, errors otherwise.
+ */
+exports.deleteReservation = async (req, res, next) => {
+    try{
+
+        const reservationID = req.params.reservationID;
+        const user = req.user;
+
+        const reservation = await ReservationRepo.getReservationByID(reservationID);
+        if (!reservation){
+            throw new Api400Error('No reservation found with the given id');
+        }
+
+        if (!(reservation.usersID.includes(user.userID))){
+            throw new Api400Error('There is no reservation with this id for the user');
+        }
+
+        await ReservationRepo.deleteUserReservation(reservationID, user.userID);
     
         res.status(204);
         return res.end();
