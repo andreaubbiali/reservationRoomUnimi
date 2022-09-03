@@ -13,7 +13,7 @@ const validationMiddleware = (req, res, next) => {
 
         let errResponse = "";
         errors.array().forEach(function (err) {
-            errResponse += err.msg + " ";
+            errResponse += err.msg + ". ";
         })
 
         res.status(400).json(errResponse);

@@ -1,8 +1,22 @@
 <%- include('header') %>
-<div class="register">
+<div>
     <h1>Room name: <%= room.name %></h1>
 
         <p>Capacity: <%= room.capacity %></p>
+
+    <form action="/book" method="POST">
+        <input type="text" name="roomID" value="<%= room._id %>" style="display:none" />
+        <label for="Date">Date</label>
+        <input id="Date" type="date" name="date" />
+
+        <select class="form-select" aria-label="Default select example" name="slot">
+            <option selected value="MORNING">Morning</option>
+            <option value="AFTERNOON">Afternoon</option>
+        </select>
+
+        <button type="submit" class="btn mb-4">Book</button>
+    </form>
+
 
         <% if(error != null){ %>
             <p class="text-danger">
