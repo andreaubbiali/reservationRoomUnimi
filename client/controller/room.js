@@ -1,11 +1,12 @@
 const axios = require('../utils/axiosInstance');
 
-let jsonOutput = {
-    'rooms': [],
-    'error': null
-}
-
 exports.getRoom = async (req, res) => {
+
+    let jsonOutput = {
+        'rooms': [],
+        'error': null
+    }
+
 
     const axiosReq = axios.axiosRequest(req, res);
 
@@ -22,16 +23,22 @@ exports.getRoom = async (req, res) => {
 
 exports.getRoomByID = async (req, res) => {
 
-    // const axiosReq = axios.axiosRequest(req, res);
+    let jsonOutput = {
+        'room': null,
+        'error': null
+    }
 
-    // await axiosReq.get('/rooms/' + req.params.id)
-    // .then(response => {
-    //     console.log('entraaaaaaaa');
-    // })
-    // .catch(error => {
-    //     jsonOutput.error = error.response.data;
-    // });
+    const axiosReq = axios.axiosRequest(req, res);
+
+    await axiosReq.get('/rooms/' + req.params.id)
+    .then(response => {
+        jsonOutput.room = response.data;
+    })
+    .catch(error => {
+        jsonOutput.error = error.response.data;
+    });
+
     console.log(jsonOutput);
 
-    return res.render('rooms', jsonOutput);
+    return res.render('room', jsonOutput);
 }

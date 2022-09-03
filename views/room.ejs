@@ -1,13 +1,13 @@
 <%- include('header') %>
 <div class="register">
-    <h1>Room <%= name %></h1>
+    <h1>Room name: <%= room.name %></h1>
 
-    <p>ROOM CAPACITY: <% capacity %></p>
+        <p>Capacity: <%= room.capacity %></p>
 
-    <% if(error != null){ %>
-        <p class="text-danger">
-            <%= error %>
-        </p> 
-    <% } %>
+        <% if(error != null){ %>
+            <p class="text-danger">
+                <%= error %>
+            </p> 
+        <% } %>
 </div>
 <%- include('footer') %>
