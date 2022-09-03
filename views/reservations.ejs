@@ -1,0 +1,20 @@
+<%- include('header') %>
+<div>
+    <h1>RESERVATIONSSS</h1>
+
+        <ul>
+            <% for(var i=0; i<reservations.length; i++) {%>
+                <div style="width:200px;height:100px;background-color:yellow">
+                    Room name: <%= reservations[i].roomName %></br>
+                    Date: <%= reservations[i].date %>
+                </div>
+            <% } %>
+        </ul>
+
+        <% if(error != null){ %>
+            <p class="text-danger">
+                <%= error %>
+            </p> 
+        <% } %>
+</div>
+<%- include('footer') %>

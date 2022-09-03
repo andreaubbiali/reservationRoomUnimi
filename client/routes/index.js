@@ -36,4 +36,6 @@ router.get('/room/:id', roomCtrl.getRoomByID);
 
 router.post('/book', urlEncoded, reservationCtrl.reserveRoom);
 
+router.get('/reservations', reservationCtrl.getReservations);
+
 module.exports = router;
