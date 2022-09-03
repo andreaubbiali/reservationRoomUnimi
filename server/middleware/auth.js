@@ -36,11 +36,11 @@ const verifyAdminToken = (req, res, next) => {
     try{
         const user = req.user;
 
-        if(!(user.isadmin)){
+        if(!(user.isAdmin)){
             throw new Api401Error('User is not an admin.');
         }
         return next();
-        
+
     }catch (err) {
         next(err);
     }

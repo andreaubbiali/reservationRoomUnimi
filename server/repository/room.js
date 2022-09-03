@@ -15,3 +15,15 @@ exports.findByUserRoles = (roles) => {
 exports.findById = (id) => {
     return Room.findById(id);
 }
+
+/**
+ * create a new room.
+ * @param {*} room the room.
+ */
+exports.createRoom = (room) => {
+    return Room.create({
+        'name': room.name,
+        'rolesAllowed': room.rolesAllowed,
+        'capacity': room.capacity,
+    });
+}

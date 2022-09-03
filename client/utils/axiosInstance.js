@@ -2,9 +2,7 @@ const axios = require('axios');
 
 exports.axiosRequest = (req, res) =>{
 
-    if (!req.session.user){
-        return res.redirect('login');
-    }
+    this.checkUserIsLogged(req, res);
 
     return axios.create({
         baseURL: process.env.API_BASE_URL,
@@ -13,3 +11,9 @@ exports.axiosRequest = (req, res) =>{
         }
     });
 } 
+
+exports.checkUserIsLogged = (req, res) => {
+    if (!req.session.user){
+        return res.redirect('login');
+    }
+}

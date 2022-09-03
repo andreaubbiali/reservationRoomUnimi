@@ -6,6 +6,7 @@ let urlEncoded = bodyParser.urlencoded({extended: false});
 const roomCtrl = require('../controller/room');
 const userCtrl = require('../controller/user');
 const reservationCtrl = require('../controller/reservation');
+const adminCtrl = require('../controller/admin');
 
 
 /**
@@ -30,9 +31,12 @@ router.get('/register', function (req, res) {
     res.render('register');
 });
 
-router.get('/rooms', roomCtrl.getRoom);
+router.get('/adminConsole', adminCtrl.adminConsole);
 
+// ROOM
+router.get('/rooms', roomCtrl.getRoom);
 router.get('/room/:id', roomCtrl.getRoomByID);
+router.post('/createRoom', urlEncoded, roomCtrl.createRoom);
 
 router.post('/book', urlEncoded, reservationCtrl.reserveRoom);
 

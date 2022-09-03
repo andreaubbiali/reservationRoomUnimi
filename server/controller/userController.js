@@ -21,7 +21,7 @@ exports.login = async (req, res, next) => {
             throw new Api400Error('Invalid credentials');
         }
 
-        user.token = JwtUtilities.createJWToken(user._id, email, user.roles);
+        user.token = JwtUtilities.createJWToken(user._id, email, user.roles, user.isAdmin);
 
         res.status(200).json(userToDto(user));
         return res.end();
@@ -53,7 +53,7 @@ exports.register = async (req, res) => {
 
         const user = await UserRepo.createUser(firstName, lastName, email, encryptedPassword, [process.env.BASE_USER_ROLE]);
 
-        user.token = JwtUtilities.createJWToken(user._id, email, user.roles);;
+        user.token = JwtUtilities.createJWToken(user._id, email, user.roles, user.isAdmin);
 
         res.status(201).json(userToDto(user));
         return res.end();

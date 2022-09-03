@@ -54,6 +54,26 @@ exports.getRoomsByUserRoles = async (req, res, next) => {
 }
 
 /**
+ * @param {*} req the request.
+ * @param {*} res the response.
+ */
+exports.createRoom = async (req, res, next) => {
+    
+    try{
+
+        // TODO check roles exactly what I want
+        await RoomRepo.createRoom(req.body);
+    
+        res.status(204);
+        return res.end();
+
+    } catch (err) {
+        next(err);
+    }
+
+}
+
+/**
  * Check if a room is reservable by the userRole, the date and the slot.
  * @param {*} userRoles the array of user roles
  * @returns true if the room is reservable, false otherwise.
