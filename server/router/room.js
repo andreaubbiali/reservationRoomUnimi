@@ -6,13 +6,13 @@ const roomController = require('../controller/roomsController');
 
 // get rooms by user roles.
 router.get('/', 
-    auth, 
+    auth.verifyToken, 
     roomController.getRoomsByUserRoles
 );
 
 // get room by id.
 router.get('/:id',
-    auth,
+    auth.verifyToken,
     roomController.getRoomByID
 )
 

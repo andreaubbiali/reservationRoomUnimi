@@ -8,13 +8,13 @@ const validator = require('../validator/reservationValidator');
 
 // user reservations.
 router.get('/user',
-    auth,
+    auth.verifyToken,
     reservationController.getUserReservations
 );
 
 // user reservations filtered.
 router.post('/userFiltered',
-    auth,
+    auth.verifyToken,
     validator.userReservationFiltered,
     validationMiddleware,
     reservationController.getUserReservationsFiltered
@@ -22,7 +22,7 @@ router.post('/userFiltered',
 
 // book a room.
 router.post('/reserveRoom', 
-    auth, 
+    auth.verifyToken, 
     validator.reserveRoomValidation,
     validationMiddleware,
     reservationController.reserveRoom
@@ -30,7 +30,7 @@ router.post('/reserveRoom',
 
 // delete a reservation
 router.delete('/:reservationID', 
-    auth,
+    auth.verifyToken,
     reservationController.deleteReservation
 );
 

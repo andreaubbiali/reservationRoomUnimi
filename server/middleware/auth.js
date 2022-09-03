@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
 
+const Api401Error = require('../errors/api401Response');
+
 /**
  * Authentication middleware, verify jwt token and continue with the request.
  * @param {*} req the request.
@@ -7,22 +9,45 @@ const jwt = require("jsonwebtoken");
  * @param {*} next.
  */
 const verifyToken = (req, res, next) => {
+    try{
 
-    const token =
+        const token =
         req.body.token || req.query.token || req.headers["x-access-token"];
 
-    if (!token) {
-        res.status(401).send("Token not found.");
-        return res.end();
-    }
-    try {
-        const decoded = jwt.verify(token, process.env.TOKEN_KEY);
-        req.user = decoded;
+        if (!token) {
+            throw new Api401Error('Token not found.');
+        }
+
+        try {
+            const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+            req.user = decoded;
+        } catch (err) {
+            throw new Api401Error('Invalid Token');
+        }
+        return next();
+
     } catch (err) {
-        res.status(401).send("Invalid Token");
-        return res.end();
+        next(err);
     }
-    return next();
 }
 
-module.exports = verifyToken;
+const verifyAdminToken = (req, res, next) => {
+
+    try{
+        const user = req.user;
+
+        if(!(user.isadmin)){
+            throw new Api401Error('User is not an admin.');
+        }
+        return next();
+        
+    }catch (err) {
+        next(err);
+    }
+
+}
+
+module.exports = {
+    verifyToken,
+    verifyAdminToken
+};
