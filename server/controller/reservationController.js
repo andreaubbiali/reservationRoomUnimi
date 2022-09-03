@@ -15,7 +15,7 @@ exports.getUserReservations = async (req, res, next) => {
 
         const user = req.user;
 
-        let reservations = await ReservationRepo.GetReservationsByUserID(user.userID);
+        let reservations = await ReservationRepo.getReservationsByUserID(user.userID);
         if (!reservations || reservations.length == 0){
             throw new Api404Error('No reservation found for the user.');
         }
@@ -39,7 +39,7 @@ exports.getUserReservations = async (req, res, next) => {
         const {active} = req.body;
         const user = req.user;
 
-        let reservations = await ReservationRepo.GetReservationsByUserID(user.userID);
+        let reservations = await ReservationRepo.getReservationsByUserID(user.userID);
 
         reservations = filterReservations(reservations, active);
 

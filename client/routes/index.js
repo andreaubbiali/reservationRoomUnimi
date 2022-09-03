@@ -38,4 +38,6 @@ router.post('/book', urlEncoded, reservationCtrl.reserveRoom);
 
 router.get('/reservations', reservationCtrl.getReservations);
 
+router.post('/deleteReservation', urlEncoded, reservationCtrl.deleteReservation);
+
 module.exports = router;

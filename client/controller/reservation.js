@@ -40,6 +40,7 @@ exports.getReservations = async (req, res) => {
                 'reservationID': response.data[i]._id,
                 'roomName': response.data[i].roomID.name,
                 'date': date[0],
+                'slot': response.data[i].slot,
             });
         }
     })
@@ -48,4 +49,18 @@ exports.getReservations = async (req, res) => {
     });
 
     return res.render('reservations', jsonObj);    
+}  
+
+exports.deleteReservation = async (req, res) => {
+
+    const reservationID = req.body.reservationID;
+    
+    const axiosReq = axios.axiosRequest(req, res);
+
+    await axiosReq.delete('/reservation/' + reservationID)
+    .catch(error => {
+        return roomCtrl.showErrorGetRoomByID(res, error.response.data);
+    });
+
+    return res.redirect('/reservations');   
 }  
