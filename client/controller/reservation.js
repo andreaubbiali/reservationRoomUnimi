@@ -14,7 +14,7 @@ exports.reserveRoom = async (req, res, next) => {
     await axiosReq.post('/reservation/book',request)
     .then(response => {
 
-        return roomCtrl.showErrorGetRoomByID(res, 'PRENOTAZIONE ANDATA A BUON FINE');
+        return roomCtrl.showErrorGetRoomByID(res, 'ROOM BOOKED');
     })
     .catch(error => {
         return roomCtrl.showErrorGetRoomByID(res, error.response.data);
