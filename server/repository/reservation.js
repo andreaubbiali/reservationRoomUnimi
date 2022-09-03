@@ -15,7 +15,7 @@ exports.getReservation = async (roomID, date, slot) => {
  * @returns the reservations of the user.
  */
 exports.GetReservationsByUserID = async (userID) => {
-    return Reservation.find({ usersID: userID });
+    return Reservation.find({ usersID: userID }).sort('date').populate('roomID');
 }
 
 /**
