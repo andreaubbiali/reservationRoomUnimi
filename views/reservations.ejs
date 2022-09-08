@@ -12,19 +12,21 @@
             <button type="submit" class="btn btn-primary">Filter</button>
         </form>
 
-        <ul>
+        <div class="row">
             <% for(var i=0; i<reservations.length; i++) {%>
-                <div style="width:200px;height:100px;background-color:yellow">
-                    Room name: <%= reservations[i].roomName %></br>
-                    Date: <%= reservations[i].date %> </br>
-                    Slot: <%= reservations[i].slot %>
+                <div class="col col-lg-4 bordifica">
+                    <div style="width:200px;height:100px;background-color:yellow">
+                        Room name: <%= reservations[i].roomName %></br>
+                        Date: <%= reservations[i].date %> </br>
+                        Slot: <%= reservations[i].slot %>
+                    </div>
+                    <form action="/deleteReservation" method="POST">
+                        <input type="text" name="reservationID" value="<%= reservations[i].reservationID %>" style="display:none" />
+                        <button type="submit" class="btn mb-4">Delete reservation</button>
+                    </form>
                 </div>
-                <form action="/deleteReservation" method="POST">
-                    <input type="text" name="reservationID" value="<%= reservations[i].reservationID %>" style="display:none" />
-                    <button type="submit" class="btn mb-4">Delete reservation</button>
-                </form>
             <% } %>
-        </ul>
+        </div>
 
         <% if(error != null){ %>
             <p class="text-danger">
