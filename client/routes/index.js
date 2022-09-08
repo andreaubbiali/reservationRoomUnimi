@@ -41,8 +41,9 @@ router.post('/createRoom', urlEncoded, roomCtrl.createRoom);
 
 router.post('/book', urlEncoded, reservationCtrl.reserveRoom);
 
+// RESERVATION
 router.get('/reservations', reservationCtrl.getReservations);
-
+router.post('/filteredReservations', urlEncoded, reservationCtrl.getFilteredReservations)
 router.post('/deleteReservation', urlEncoded, reservationCtrl.deleteReservation);
 
 module.exports = router;

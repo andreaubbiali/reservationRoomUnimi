@@ -2,6 +2,16 @@
 <div>
     <h1>RESERVATIONSSS</h1>
 
+        <form action="/filteredReservations" method="POST">
+            <select class="custom-select" name="filter">
+                <option selected disabled>Select a filter</option>
+                <option value="allReservations">All reservations</option>
+                <option value="activeReservations">Active reservations</option>
+                <option value="passedReservations">Passed reservations</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+
         <ul>
             <% for(var i=0; i<reservations.length; i++) {%>
                 <div style="width:200px;height:100px;background-color:yellow">
