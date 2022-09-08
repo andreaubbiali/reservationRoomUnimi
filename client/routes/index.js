@@ -20,6 +20,7 @@ router.get('/', function (req, res) {
 
 router.get('/login', function(req, res) {
     let jsonOutput = {
+        'isAdmin': false,
         error: null,
     }
     res.render('login', jsonOutput);

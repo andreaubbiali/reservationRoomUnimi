@@ -72,6 +72,7 @@ function userToDto(user) {
         lastName: user.lastName,
         email: user.email,
         roles: user.roles,
-        token: user.token
+        token: user.token,
+        isAdmin: user.isAdmin
     }
 }

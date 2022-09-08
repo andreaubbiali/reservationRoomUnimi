@@ -20,6 +20,13 @@
 }
 
 /**
+* HEADER
+*/
+.displayAdminConsole {
+    display:none;
+}
+
+/**
 * FOOTER
 */
 .footer-stl {

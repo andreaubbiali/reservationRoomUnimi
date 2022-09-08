@@ -4,6 +4,7 @@ const roomCtrl = require('./room');
 exports.reserveRoom = async (req, res) => {
 
     const request = {
+        'isAdmin': req.session.user.isAdmin,
         'roomID': req.body.roomID,
         'date':  req.body.date,
         'slot': req.body.slot
@@ -25,6 +26,7 @@ exports.reserveRoom = async (req, res) => {
 exports.getReservations = async (req, res) => {
 
     let jsonObj = {
+        'isAdmin': req.session.user.isAdmin,
         'reservations': [], 
         'error': null
     }

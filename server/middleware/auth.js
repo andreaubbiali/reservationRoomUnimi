@@ -20,6 +20,7 @@ const verifyToken = (req, res, next) => {
 
         try {
             const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+            console.log('REQUEST FROM: ' + decoded.userEmail);
             req.user = decoded;
         } catch (err) {
             throw new Api401Error('Invalid Token');

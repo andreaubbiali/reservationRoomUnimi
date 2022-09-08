@@ -7,6 +7,7 @@ exports.loginUser = async (req, res) => {
     }
 
     let jsonOutput = {
+        'isAdmin': false,
         error: null,
     }
 
