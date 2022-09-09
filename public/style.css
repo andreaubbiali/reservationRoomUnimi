@@ -3,6 +3,24 @@
     border: solid 5px yellow;
 }
 
+.Site {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+  
+.Site-content {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1;
+}
+  
+.h1Title {
+    text-align: center;
+    margin-top:20px;
+}
+
 /**
 * LOGIN
 */
@@ -20,6 +38,29 @@
 }
 
 /**
+* ROOMS
+*/
+
+.colRoom {
+    min-height: 150px;
+}
+
+.colRoomElement {
+    text-align: center;
+    display: block;
+    height: 90%;
+    margin-top: 5px;
+    border-radius: 25px;
+    color:black;
+    background-color: #e4ecd7;
+}
+
+.pRoomElement {
+    height: 100%;
+    padding-top: 25px;
+}
+
+/**
 * HEADER
 */
 .displayAdminConsole {
@@ -29,11 +70,6 @@
 /**
 * FOOTER
 */
-.footer-stl {
-    position:absolute;
-    width:100%;
-    bottom:0;
-}
 
 .footer-snd {
     background-color: rgba(0, 0, 0, 0.2);
