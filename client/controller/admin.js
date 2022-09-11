@@ -7,6 +7,7 @@ let jsonOutput = {
 
 exports.adminConsole = async (req, res) => {
     jsonOutput.isAdmin = req.session.user.isAdmin;
+    jsonOutput.error = null;
 
     checkUserIsLogged(req, res);
 

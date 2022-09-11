@@ -30,6 +30,7 @@ let roomOutput = {
 
 exports.getRoomByID = async (req, res) => {
     roomOutput.isAdmin = req.session.user.isAdmin;
+    roomOutput.error = null;
 
     const axiosReq = axios.axiosRequest(req, res);
 

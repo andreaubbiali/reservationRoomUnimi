@@ -7,17 +7,20 @@ let jsonOutput = {
 
 exports.getLoginPage = (req, res) => {
     jsonOutput.isAdmin = false;
+    jsonOutput.error = null;
     
     return res.render('login', jsonOutput);
 }
 
 exports.getRegistrationPage = (req, res) => {
     jsonOutput.isAdmin = false;
+    jsonOutput.error = null;
     
     return res.render('register', jsonOutput);
 }
 
 exports.loginUser = async (req, res) => {
+    jsonOutput.error = null;
 
     if (req.session.user){
         return res.redirect('rooms');
@@ -44,6 +47,7 @@ exports.loginUser = async (req, res) => {
 }
 
 exports.registerUser = async (req, res) => {
+    jsonOutput.error = null;
 
     if (req.body.password != req.body.repPassword) {
         jsonOutput.error = 'Passwords does not match';
