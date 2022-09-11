@@ -1,49 +1,43 @@
 <%- include('header') %>
-    <div class="container-fluid">
+<div class="container-fluid">
 
+    <h1 class="h1Title">Login</h1>
 
-        <div class="row justify-content-md-center rowLogin">
-            <!-- sx col -->
-            <div class="col col-lg-3">
-            </div>
+    <div class="row text-center rowLogin">
+        <div class="col-md-2"></div>
 
-            <!-- center col -->
-            <div class="col col-lg-6 login">
-                <form class="text-center" action="/login" method="POST">
+        <div class="col-md-8">
+            <form action="/login" method="POST">
 
-                    <div class="form-outline mb-4">
-                        <span class="fas fa-user">
-                            <input class=" form-control inputLogin" type="email" placeholder="Email" id="email" name="email"/>
-                            <label class="form-label" for="email">Email address</label>
-                        </span>
-                    </div>
+                <div class="mb-4">
+                    <span class="fas fa-user"></span>
+                    <label class="form-label" for="email">Email address</label>
+                    <input class="form-control" type="email" placeholder="Email" id="email" name="email" required/> 
+                </div>
 
-                    <div class="form-outline mb-4">
-                        <span class="fas fa-lock">
-                            <input class="form-control inputLogin" type="password" placeholder="Password" id="password" name="password"/>
-                            <label class="form-label" for="password">Password</label>
-                        </span>
-                    </div>
+                <div class="mb-4">
+                    <span class="fas fa-lock"></span>
+                    <label class="form-label" for="password">Password</label>
+                    <input class="form-control" type="password" placeholder="Password" id="password" name="password" required/>
+                </div>
 
-                    <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+                <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
 
-                    <div class="text-center">
-                        <p>Not a member? <a href="/register">Register</a></p>
-                    </div>
-                </form>
+                <div class="text-center">
+                    <p>Not a member? <a href="/register">Register</a></p>
+                </div>
+            </form>
 
-                <% if(error != null){ %>
-                    <p class="text-danger">
-                        <%= error %>
-                    </p> 
-                <% } %>
-
-            </div>
-
-            <!-- dx col -->
-            <div class="col col-lg-3">
-            </div>
+            <% if(error != null){ %>
+                <p class="text-danger">
+                    <%= error %>
+                </p> 
+            <% } %>
 
         </div>
+
+        <div class="col-md-2"></div>
+
     </div>
-    <%- include('footer') %>
+</div>
+<%- include('footer') %>
