@@ -21,6 +21,10 @@
     margin-top:20px;
 }
 
+.btnColor {
+    background-color: rgb(184, 184, 184);
+}
+
 /**
 * LOGIN
 */
