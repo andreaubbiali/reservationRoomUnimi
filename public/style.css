@@ -10,7 +10,7 @@
 }
   
 .Site-content {
-    max-width: 90%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
     flex: 1;
@@ -38,14 +38,14 @@
 }
 
 /**
-* ROOMS
+* ROOMS & RESERVATIONS
 */
 
-.colRoom {
+.colStyle {
     min-height: 150px;
 }
 
-.colRoomElement {
+.colElement {
     text-align: center;
     display: block;
     height: 90%;
@@ -59,6 +59,19 @@
     height: 100%;
     padding-top: 25px;
 }
+
+.filterRow {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+@media (max-width:768px) {
+
+    .filterCol {
+        margin-top:3px;
+    }
+}
+
 
 /**
 * HEADER

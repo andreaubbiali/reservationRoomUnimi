@@ -5,10 +5,10 @@
 
     <div class="row">
         <% for(var i=0; i<rooms.length; i++) {%>
-            <div class="col-md-4 colRoom">
+            <div class="col-md-4 colStyle">
                 
                 <a href="/room/<%= rooms[i]._id %>" style="text-decoration:none">
-                    <span class="colRoomElement">
+                    <span class="colElement">
                             <p class="pRoomElement">
                                 Room name: <%= rooms[i].name %></br>
                                 Capacity: <%= rooms[i].capacity %>

@@ -1,29 +1,39 @@
 <%- include('header') %>
-<div>
-    <h1>RESERVATIONSSS</h1>
+<div class="container-fluid">
 
+    <h1 class="h1Title">Reservations</h1>
+
+        
         <form action="/filteredReservations" method="POST">
-            <select class="custom-select" name="filter">
-                <option selected disabled>Select a filter</option>
-                <option value="allReservations">All reservations</option>
-                <option value="activeReservations">Active reservations</option>
-                <option value="passedReservations">Passed reservations</option>
-            </select>
-            <button type="submit" class="btn btn-primary">Filter</button>
+            <div class="row filterRow">
+                <div class="col-md-11">
+                    <select class="custom-select" name="filter">
+                        <option selected disabled>Select a filter</option>
+                        <option value="allReservations">All reservations</option>
+                        <option value="activeReservations">Active reservations</option>
+                        <option value="passedReservations">Passed reservations</option>
+                    </select>
+                </div>
+                <div class="col-md-1 filterCol">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
         </form>
 
         <div class="row">
             <% for(var i=0; i<reservations.length; i++) {%>
-                <div class="col col-lg-4 bordifica">
-                    <div style="width:200px;height:100px;background-color:yellow">
-                        Room name: <%= reservations[i].roomName %></br>
-                        Date: <%= reservations[i].date %> </br>
-                        Slot: <%= reservations[i].slot %>
+                <div class="col-md-4 colStyle">
+                    <div class="colElement">
+                        <p class="pElement">
+                            Room name: <%= reservations[i].roomName %></br>
+                            Date: <%= reservations[i].date %> </br>
+                            Slot: <%= reservations[i].slot %>
+                        </p>
+                        <form action="/deleteReservation" method="POST">
+                            <input type="text" name="reservationID" value="<%= reservations[i].reservationID %>" style="display:none" />
+                            <button type="submit" class="btn mb-4">Delete reservation</button>
+                        </form>
                     </div>
-                    <form action="/deleteReservation" method="POST">
-                        <input type="text" name="reservationID" value="<%= reservations[i].reservationID %>" style="display:none" />
-                        <button type="submit" class="btn mb-4">Delete reservation</button>
-                    </form>
                 </div>
             <% } %>
         </div>
