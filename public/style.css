@@ -109,6 +109,15 @@
 }
 
 /**
+* ADMIN
+*/
+.createForm {
+    background-color: beige;
+    border-radius: 25px;
+    padding-top:5px;
+}
+
+/**
 * HEADER
 */
 .displayAdminConsole {

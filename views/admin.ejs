@@ -2,19 +2,42 @@
 <div class="container-fluid">
     <h1 class="h1Title">ADMIN CONSOLE</h1>
 
-    <form action="/createRoom" method="POST">
-        <input type="text" name="name" placeholder="Room name" required>
-        <select class="form-select" aria-label="Default select example" name="rolesAllowed" required>
-            <option selected value="STUDENT">Student</option>
-            <option value="PROFESSOR">Professor</option>
-            </select>
-        <input type="number" name="capacity" placeholder="Capacity" min="1" required>
-        <input type="text" name="roomManager" placeholder="Room manager" required>
-        <button type="submit" class="btn btn-primary">Create room</button>
-    </form>
+    <div class="row">
 
-    <br>
-    <br>
+        <div class="col-md-2"></div>
+
+        <div class="col-md-8 createForm">
+
+            <form action="/createRoom" method="POST">
+                <div class="mb-4">
+                    <label for="roomName">Room name</label>
+                    <input type="text" class="form-control" name="name" id="roomName" placeholder="Room name" required>
+                </div>
+                <div class="mb-4">
+                    <label for="rolesAllowed">Room name</label>
+                    <select class="form-control" aria-label="Default select example" id="rolesAllowed" name="rolesAllowed" required>
+                        <option selected value="STUDENT">Student</option>
+                        <option value="PROFESSOR">Professor</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="capacity">Capacity</label>
+                    <input type="number" class="form-control" id="capacity" name="capacity" placeholder="Capacity" min="1" value="1" required>
+                </div>
+                <div class="mb-4">
+                    <label for="roomManager">Room manager</label>
+                    <input type="text" class="form-control" id="roomManager" name="roomManager" placeholder="Room manager" required>
+                </div>
+                <div class="mb-4">
+                    <button type="submit" class="btn btn-block btn-primary">Create room</button>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="col-md-2"></div>
+
+    </div>
 
     <% if(error != null){ %>
         <p class="text-danger">
