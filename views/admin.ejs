@@ -1,25 +1,25 @@
 <%- include('header') %>
-    <div>
-        <h1>ADMIN CONSOLE</h1>
+<div class="container-fluid">
+    <h1 class="h1Title">ADMIN CONSOLE</h1>
 
-        <form action="/createRoom" method="POST">
-            <input type="text" name="name" placeholder="Room name" required>
-            <select class="form-select" aria-label="Default select example" name="rolesAllowed" required>
-                <option selected value="STUDENT">Student</option>
-                <option value="PROFESSOR">Professor</option>
-              </select>
-            <input type="number" name="capacity" placeholder="Capacity" min="1" required>
-            <input type="text" name="roomManager" placeholder="Room manager" required>
-            <button type="submit" class="btn btn-primary">Create room</button>
-        </form>
+    <form action="/createRoom" method="POST">
+        <input type="text" name="name" placeholder="Room name" required>
+        <select class="form-select" aria-label="Default select example" name="rolesAllowed" required>
+            <option selected value="STUDENT">Student</option>
+            <option value="PROFESSOR">Professor</option>
+            </select>
+        <input type="number" name="capacity" placeholder="Capacity" min="1" required>
+        <input type="text" name="roomManager" placeholder="Room manager" required>
+        <button type="submit" class="btn btn-primary">Create room</button>
+    </form>
 
-        <br>
-        <br>
+    <br>
+    <br>
 
-        <% if(error !=null){ %>
-            <p class="text-danger">
-                <%= error %>
-            </p>
-            <% } %>
-    </div>
+    <% if(error != null){ %>
+        <p class="text-danger">
+            <%= error %>
+        </p> 
+    <% } %>
+</div>
 <%- include('footer') %>
