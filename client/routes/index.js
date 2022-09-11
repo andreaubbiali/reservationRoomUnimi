@@ -23,6 +23,7 @@ router.get('/', function (req, res) {
 router.get('/login', userCtrl.getLoginPage);
 router.get('/register', userCtrl.getRegistrationPage);
 router.post('/login', urlEncoded, userCtrl.loginUser);
+router.post('/register', urlEncoded, userCtrl.registerUser);
 router.get('/logout', userCtrl.logoutUser);
 
 // ADMIN

@@ -23,11 +23,6 @@ exports.loginUser = async (req, res) => {
         return res.redirect('rooms');
     }
 
-    let jsonOutput = {
-        'isAdmin': false,
-        error: null,
-    }
-
     if (req.body.email && req.body.password){
 
         await axios.post(process.env.API_BASE_URL + 'user/login', {
@@ -46,6 +41,26 @@ exports.loginUser = async (req, res) => {
     }
 
     return res.render('login', jsonOutput);
+}
+
+exports.registerUser = async (req, res) => {
+
+    await axios.post(process.env.API_BASE_URL + 'user/register', {
+        email: req.body.email,
+        password: req.body.password,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName
+    })
+    .then(response => {
+        req.session.user = response.data;
+        return res.redirect('rooms');
+    })
+    .catch(error => {
+        console.log(error.response.data);
+        jsonOutput.error = error.response.data;
+    })
+
+    return res.render('register', jsonOutput);
 }
 
 exports.logoutUser = (req, res) => {
