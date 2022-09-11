@@ -1,5 +1,22 @@
 const axios = require('axios');
 
+let jsonOutput = {
+    'isAdmin': false,
+    'error': null,
+}
+
+exports.getLoginPage = (req, res) => {
+    jsonOutput.isAdmin = false;
+    
+    return res.render('login', jsonOutput);
+}
+
+exports.getRegistrationPage = (req, res) => {
+    jsonOutput.isAdmin = false;
+    
+    return res.render('register', jsonOutput);
+}
+
 exports.loginUser = async (req, res) => {
 
     if (req.session.user){

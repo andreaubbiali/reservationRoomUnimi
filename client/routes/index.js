@@ -20,17 +20,9 @@ router.get('/', function (req, res) {
 });
 
 // USER
-router.get('/login', function(req, res) {
-    let jsonOutput = {
-        'isAdmin': false,
-        error: null,
-    }
-    res.render('login', jsonOutput);
-});
+router.get('/login', userCtrl.getLoginPage);
+router.get('/register', userCtrl.getRegistrationPage);
 router.post('/login', urlEncoded, userCtrl.loginUser);
-router.get('/register', function (req, res) {
-    res.render('register');
-});
 router.get('/logout', userCtrl.logoutUser);
 
 // ADMIN
