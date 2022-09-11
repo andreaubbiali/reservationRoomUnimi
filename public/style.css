@@ -79,9 +79,22 @@
     margin-top: 20px;
 }
 
-.roomInfo {
+.roomInfoCol {
     padding-top: 2%;
     text-align: center;
+}
+
+.roomInfo {
+    height: 70%;
+    margin-top: 40px;
+}
+
+@media (max-width:768px) {
+
+    .roomInfo {
+        margin-top: 3%;
+        margin-bottom: 3%;
+    }
 }
 
 .bookForm {
