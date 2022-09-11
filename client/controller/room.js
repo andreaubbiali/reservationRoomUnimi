@@ -44,7 +44,7 @@ exports.getRoomByID = async (req, res) => {
     return res.render('room', roomOutput);
 }
 
-exports.showErrorGetRoomByID = async (res, err) => {
+exports.showErrorGetRoomByID = async (req, res, err) => {
     roomOutput.isAdmin = req.session.user.isAdmin;
     roomOutput.error = err;
 
@@ -56,7 +56,7 @@ exports.createRoom = async (req, res) => {
 
     await axiosReq.post('/rooms', req.body)
     .catch(error => {
-        return adminCtrl.showErrorAdminConsole(res, error.response.data);
+        return adminCtrl.showErrorAdminConsole(req, res, error.response.data);
     });  
 
     return res.redirect('adminConsole');

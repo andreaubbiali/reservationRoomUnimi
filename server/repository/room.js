@@ -25,5 +25,6 @@ exports.createRoom = (room) => {
         'name': room.name,
         'rolesAllowed': room.rolesAllowed,
         'capacity': room.capacity,
+        'roomManager': room.roomManager,
     });
 }

@@ -3,6 +3,7 @@
     <h1>Room name: <%= room.name %></h1>
 
         <p>Capacity: <%= room.capacity %></p>
+        <p>Room manager: <%= room.roomManager %></p>
 
     <form action="/book" method="POST">
         <input type="text" name="roomID" value="<%= room._id %>" style="display:none" />

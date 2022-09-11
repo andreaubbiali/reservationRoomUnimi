@@ -14,6 +14,10 @@ const roomSchema = new mongoose.Schema({
         type: Number,
         required: true,
         min: 1
+    },
+    roomManager: {
+        type: String,
+        required: true
     }
 },
 {versionKey: false});

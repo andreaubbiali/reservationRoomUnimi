@@ -15,10 +15,10 @@ exports.reserveRoom = async (req, res) => {
     await axiosReq.post('/reservation/reserveRoom',request)
     .then(response => {
 
-        return roomCtrl.showErrorGetRoomByID(res, 'ROOM BOOKED');
+        return roomCtrl.showErrorGetRoomByID(req, res, 'ROOM BOOKED');
     })
     .catch(error => {
-        return roomCtrl.showErrorGetRoomByID(res, error.response.data);
+        return roomCtrl.showErrorGetRoomByID(req, res, error.response.data);
     });
 
 }
@@ -41,7 +41,7 @@ exports.deleteReservation = async (req, res) => {
 
     await axiosReq.delete('/reservation/' + reservationID)
     .catch(error => {
-        return roomCtrl.showErrorGetRoomByID(res, error.response.data);
+        return roomCtrl.showErrorGetRoomByID(req, res, error.response.data);
     });
 
     return res.redirect('/reservations');   
@@ -84,6 +84,7 @@ async function reservationRequest(req, res, filter) {
             jsonObj.reservations.push({
                 'reservationID': response.data[i]._id,
                 'roomName': response.data[i].roomID.name,
+                'roomManager': response.data[i].roomID.roomManager,
                 'date': date[0],
                 'slot': response.data[i].slot,
             })

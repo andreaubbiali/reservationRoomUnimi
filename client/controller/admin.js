@@ -13,7 +13,7 @@ exports.adminConsole = async (req, res) => {
     return res.render('admin', jsonOutput);
 }
 
-exports.showErrorAdminConsole = async (res, err) => {
+exports.showErrorAdminConsole = async (req, res, err) => {
     jsonOutput.isAdmin = req.session.user.isAdmin;
     jsonOutput.error = err;
 
