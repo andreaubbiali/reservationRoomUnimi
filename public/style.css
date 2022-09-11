@@ -72,6 +72,28 @@
     }
 }
 
+/**
+* ROOM
+*/
+.rowRoom {
+    margin-top: 20px;
+}
+
+.roomInfo {
+    padding-top: 2%;
+    text-align: center;
+}
+
+.bookForm {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.formRoom {
+    padding-top:2%;
+    background-color: beige;
+}
 
 /**
 * HEADER
