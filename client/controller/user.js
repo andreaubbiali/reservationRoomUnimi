@@ -30,3 +30,10 @@ exports.loginUser = async (req, res) => {
 
     return res.render('login', jsonOutput);
 }
+
+exports.logoutUser = (req, res) => {
+
+    req.session.destroy();
+
+    return res.redirect('/login');
+}
