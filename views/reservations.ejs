@@ -25,10 +25,10 @@
                 <div class="col-md-4 colStyle">
                     <div class="colElement">
                         <p class="pElement">
-                            Room name: <%= reservations[i].roomName %></br>
-                            Room manager: <%= reservations[i].roomManager %></br>
-                            Date: <%= reservations[i].date %> </br>
-                            Slot: <%= reservations[i].slot %>
+                            Room name: <span class="font-weight-bold"><%= reservations[i].roomName %></span></br>
+                            Room manager: <span class="font-weight-bold"><%= reservations[i].roomManager %></span></br>
+                            Date: <span class="font-weight-bold"><%= reservations[i].date %></span></br>
+                            Slot: <span class="font-weight-bold"><%= reservations[i].slot %></span>
                         </p>
                         <form action="/deleteReservation" method="POST">
                             <input type="text" name="reservationID" value="<%= reservations[i].reservationID %>" style="display:none" />
