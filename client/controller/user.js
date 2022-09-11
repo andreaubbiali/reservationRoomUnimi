@@ -45,6 +45,11 @@ exports.loginUser = async (req, res) => {
 
 exports.registerUser = async (req, res) => {
 
+    if (req.body.password != req.body.repPassword) {
+        jsonOutput.error = 'Passwords does not match';
+        return res.render('register', jsonOutput);
+    }
+
     await axios.post(process.env.API_BASE_URL + 'user/register', {
         email: req.body.email,
         password: req.body.password,

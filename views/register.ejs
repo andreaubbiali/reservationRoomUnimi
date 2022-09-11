@@ -1,17 +1,46 @@
 <%- include('header') %>
-<div class="register">
-    <h1>Register</h1>
+<div class="container-fluid">
+    <h1 class="h1Title">Register</h1>
 
-    <form action="/register" method="POST">
-        <input type="text" name="firstName" placeholder="First name" id="firstName" required>
-        <input type="text" name="lastName" placeholder="Last name" id="lastName" required>
-        <input type="text" name="email" placeholder="Email" id="email" required>
+    <div class="row">
+
+        <div class="col-md-2"></div>
+
+        <div class="col-md-8">
+            <form action="/register" method="POST">
+                <div class="mb-4">
+                    <label for="firstName">First name</label>
+                    <input type="text" class="form-control" name="firstName" id="firstName" placeholder="First name" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="lastName">Last name</label>
+                    <input type="text" class="form-control" name="lastName" placeholder="Last name" id="lastName" required>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" name="email" placeholder="Email" id="email" required>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Password" id="password" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="repeatPassword">Repeat password</label>
+                    <input type="password" class="form-control" name="repPassword" placeholder="repeat password" id="repeatPassword" required>
+                </div>
+
+                <div class="mb-4">
+                    <button type="submit" title="register" class="btn btn-block btn-primary mb-4">Register</button>
+                </div>
+            </form>
+        </div>
         
-        <input type="password" name="password" placeholder="Password" id="password" required>
-        <input type="password" name="repPassword" placeholder="repeat password" id="repeatPassword" required>
-
-        <button type="submit" title="register" class="btn btnColor mb-4">Register</button>
-    </form>
+        <div class="col-md-2"></div>
+    </div>
         
     <% if(error != null){ %>
         <p class="text-danger">
