@@ -12,7 +12,6 @@ app.set('view engine', 'ejs');
 
 app.use(express.json());
 app.use(bodyParser.json());
-// todo fix cors
 app.use(cors())
 
 const rooms = require('./router/room');

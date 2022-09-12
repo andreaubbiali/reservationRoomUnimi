@@ -12,7 +12,6 @@ app.set('view engine', 'ejs');
 // app.use(bodyParser.json());
 // let urlEncoded = bodyParser.urlencoded({extended: false});
 
-// TODO fix session
 app.use(session({
     secret: "SecxretT",
     resave: false,

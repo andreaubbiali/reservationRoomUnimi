@@ -60,8 +60,6 @@ exports.getRoomsByUserRoles = async (req, res, next) => {
 exports.createRoom = async (req, res, next) => {
     
     try{
-
-        // TODO check roles exactly what I want
         await RoomRepo.createRoom(req.body);
     
         res.status(204);
