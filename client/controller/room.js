@@ -56,9 +56,10 @@ exports.createRoom = async (req, res) => {
     const axiosReq = axios.axiosRequest(req, res);
 
     await axiosReq.post('/rooms', req.body)
+    .then(response => {
+        res.redirect('adminConsole');
+    })
     .catch(error => {
-        return adminCtrl.showErrorAdminConsole(req, res, error.response.data);
-    });  
-
-    return res.redirect('adminConsole');
+        adminCtrl.showErrorAdminConsole(req, res, error.response.data);
+    }); 
 }

@@ -14,11 +14,10 @@ exports.reserveRoom = async (req, res) => {
 
     await axiosReq.post('/reservation/reserveRoom',request)
     .then(response => {
-
-        return roomCtrl.showErrorGetRoomByID(req, res, 'ROOM BOOKED');
+        roomCtrl.showErrorGetRoomByID(req, res, 'ROOM BOOKED');
     })
     .catch(error => {
-        return roomCtrl.showErrorGetRoomByID(req, res, error.response.data);
+        roomCtrl.showErrorGetRoomByID(req, res, error.response.data);
     });
 
 }
@@ -40,11 +39,12 @@ exports.deleteReservation = async (req, res) => {
     const axiosReq = axios.axiosRequest(req, res);
 
     await axiosReq.delete('/reservation/' + reservationID)
+    .then(response => {
+        res.redirect('/reservations'); 
+    })
     .catch(error => {
-        return roomCtrl.showErrorGetRoomByID(req, res, error.response.data);
+        roomCtrl.showErrorGetRoomByID(req, res, error.response.data);
     });
-
-    return res.redirect('/reservations');   
 }  
 
 async function reservationRequest(req, res, filter) {

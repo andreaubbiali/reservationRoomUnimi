@@ -34,16 +34,17 @@ exports.loginUser = async (req, res) => {
         })
         .then(response => {
             req.session.user = response.data;
-            return res.redirect('rooms');
+            res.redirect('rooms');
         })
         .catch(error => {
-            console.log(error.response.data);
             jsonOutput.error = error.response.data;
+            res.render('login', jsonOutput);
         })
    
+    } else {
+        jsonOutput.error = 'email or password missing';
+        res.render('login', jsonOutput);
     }
-
-    return res.render('login', jsonOutput);
 }
 
 exports.registerUser = async (req, res) => {
@@ -65,11 +66,9 @@ exports.registerUser = async (req, res) => {
         return res.redirect('rooms');
     })
     .catch(error => {
-        console.log(error.response.data);
         jsonOutput.error = error.response.data;
+        res.render('register', jsonOutput);
     })
-
-    return res.render('register', jsonOutput);
 }
 
 exports.logoutUser = (req, res) => {
