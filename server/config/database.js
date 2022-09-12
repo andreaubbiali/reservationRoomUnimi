@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 
 const { MONGO_URI, DBNAME, DATABASE_DEBUGMODE } = process.env;
 
-mongoose.set('debug', DATABASE_DEBUGMODE);
+if (DATABASE_DEBUGMODE === 'true'){
+    mongoose.set('debug', true);
+}
+
 
 exports.connect = () => {
     // Connecting to the database
