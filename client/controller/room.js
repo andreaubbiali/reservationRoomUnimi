@@ -3,11 +3,8 @@ const adminCtrl = require('./admin');
 
 exports.getRoom = async (req, res) => {
 
-    let jsonOutput = {
-        'isAdmin': req.session.user.isAdmin,
-        'rooms': [],
-        'error': null
-    }
+    let {rooms:jsonOutput} = require('../model/model');
+    jsonOutput.isAdmin = req.session.user.isAdmin;
 
     const axiosReq = axios.axiosRequest(req, res);
 
@@ -22,13 +19,9 @@ exports.getRoom = async (req, res) => {
     return res.render('rooms', jsonOutput);
 }
 
-let roomOutput = {
-    'isAdmin': false,
-    'room': null,
-    'error': null
-}
-
 exports.getRoomByID = async (req, res) => {
+    let {room:roomOutput} = require('../model/model');
+
     roomOutput.isAdmin = req.session.user.isAdmin;
     roomOutput.error = null;
 
@@ -46,6 +39,8 @@ exports.getRoomByID = async (req, res) => {
 }
 
 exports.showErrorGetRoomByID = async (req, res, err) => {
+    let {room:roomOutput} = require('../model/model');
+
     roomOutput.isAdmin = req.session.user.isAdmin;
     roomOutput.error = err;
 

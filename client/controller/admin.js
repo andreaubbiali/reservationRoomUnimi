@@ -1,9 +1,6 @@
 const {checkUserIsLogged} = require('../utils/axiosInstance');
 
-let jsonOutput = {
-    'isAdmin': false,
-    'error': null
-}
+let {basicModel:jsonOutput} = require('../model/model');
 
 exports.adminConsole = async (req, res) => {
     jsonOutput.isAdmin = req.session.user.isAdmin;

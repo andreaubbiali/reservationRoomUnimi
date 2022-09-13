@@ -1,9 +1,6 @@
 const axios = require('axios');
 
-let jsonOutput = {
-    'isAdmin': false,
-    'error': null,
-}
+let {basicModel:jsonOutput} = require('../model/model');
 
 exports.getLoginPage = (req, res) => {
     jsonOutput.isAdmin = false;

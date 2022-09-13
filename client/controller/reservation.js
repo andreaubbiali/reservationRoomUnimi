@@ -49,11 +49,9 @@ exports.deleteReservation = async (req, res) => {
 
 async function reservationRequest(req, res, filter) {
 
-    let jsonObj = {
-        'isAdmin': req.session.user.isAdmin,
-        'reservations': [], 
-        'error': null
-    }
+    let {reservations:jsonObj} = require('../model/model');
+    jsonObj.reservations = [];
+    jsonObj.isAdmin = req.session.user.isAdmin
 
     const axiosReq = axios.axiosRequest(req, res);
 
