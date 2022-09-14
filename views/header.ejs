@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="http://localhost:3000/style.css" />
 </head>
 
-<body class="Site">
+<body class="Site" onload="loadLocation()">
 
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -34,6 +34,8 @@
                         <a class="nav-link" href="/adminConsole">Admin console</a>
                     </li>
                 </ul>
+
+                <span class="navbar-text" style="margin-right:5px;" id="location"></span>
 
                 <form action="/logout">
                     <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Logout</button>
