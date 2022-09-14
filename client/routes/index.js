@@ -10,10 +10,6 @@ const adminCtrl = require('../controller/admin');
 const {checkLogin} = require('../middleware/authMiddleware');
 
 
-/**
- * Render of ejs pages
- */
-
 // GET home page.
 router.get('/', function (req, res) {
     res.redirect('/login');
