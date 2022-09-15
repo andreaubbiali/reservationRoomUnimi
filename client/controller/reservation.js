@@ -51,6 +51,7 @@ async function reservationRequest(req, res, filter) {
 
     let {reservations:jsonObj} = require('../model/model');
     jsonObj.reservations = [];
+    jsonObj.error = null;
     jsonObj.isAdmin = req.session.user.isAdmin
 
     const axiosReq = axios.axiosRequest(req, res);
