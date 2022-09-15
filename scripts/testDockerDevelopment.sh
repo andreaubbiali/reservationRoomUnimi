@@ -5,7 +5,6 @@ NC='\033[0m' # No Color
 
 printf "${GREEN}start development${NC}\n"
 
-# docker build -t reservationroom .
 
 printf "docker app id:"
 docker run -d -t --net=host --name=reservationRoomApp reservationroom
