@@ -71,6 +71,8 @@ exports.reserveRoom = async (req, res, next) => {
         if (activeUserReservations(userReservations) >= process.env.MAX_ACTIVE_RESERVATION){
             throw new Api400Error('Maximum number of reservation reached');
         }
+
+        // if(userReservations.filter.date)
     
         // check user role with room role
         if (!(await RoomCtrl.isRoomReservable(roomID, user.roles, user.userID, date, slot))) {
