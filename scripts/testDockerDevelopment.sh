@@ -11,11 +11,11 @@ printf "\n"
 
 printf "docker db id:"
 docker run -d -t --net=host --name=reservationRoomDB -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=admin mongo 
+docker cp dump/ reservationRoomDB:/dump
+docker exec reservationRoomDB mongorestore -u admin -p admin dump/
 printf "\n"
 
 sleep 2s
-
-exec ./scripts/loadAdminData.sh &
 
 # START APP
 docker exec reservationRoomApp npm run dev
