@@ -37,7 +37,7 @@ exports.getRoomByID = async (req, res) => {
     .catch(error => {
         roomOutput.error = error.response.data;
     });  
-
+    
     return res.render('room', roomOutput);
 }
 
@@ -45,7 +45,6 @@ exports.showErrorGetRoomByID = async (req, res, err) => {
     let {room:roomOutput} = require('../model/model');
 
     roomOutput.isAdmin = req.session.user.isAdmin;
-    roomOutput.room = null; 
     roomOutput.error = err;
 
     return res.render('room', roomOutput);
