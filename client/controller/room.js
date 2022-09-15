@@ -5,6 +5,8 @@ exports.getRoom = async (req, res) => {
 
     let {rooms:jsonOutput} = require('../model/model');
     jsonOutput.isAdmin = req.session.user.isAdmin;
+    jsonOutput.rooms = [];
+    jsonOutput.error = null;
 
     const axiosReq = axios.axiosRequest(req, res);
 
@@ -23,6 +25,7 @@ exports.getRoomByID = async (req, res) => {
     let {room:roomOutput} = require('../model/model');
 
     roomOutput.isAdmin = req.session.user.isAdmin;
+    roomOutput.room = null; 
     roomOutput.error = null;
 
     const axiosReq = axios.axiosRequest(req, res);
@@ -42,6 +45,7 @@ exports.showErrorGetRoomByID = async (req, res, err) => {
     let {room:roomOutput} = require('../model/model');
 
     roomOutput.isAdmin = req.session.user.isAdmin;
+    roomOutput.room = null; 
     roomOutput.error = err;
 
     return res.render('room', roomOutput);
