@@ -9,7 +9,7 @@ build_docker_image:
 	docker build -t reservationroom .
 
 start_docker_dev:
-	./scripts/testDockerDevelopment.sh
+	./deploy/scripts/testDockerDevelopment.sh
 
 delete_docker_containers:
-	./scripts/deleteContainers.sh
+	./deploy/scripts/deleteContainers.sh
